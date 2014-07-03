@@ -1,5 +1,5 @@
 Package.describe({
-  summary: 'Helpful abstractions around the core timer functions.'
+  summary: 'Common utility helpers.'
 });
 
 
