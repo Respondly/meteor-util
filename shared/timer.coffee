@@ -1,8 +1,11 @@
 ###
 Provides a more convenient way of settings a timeout.
+
 @param milliseconds:  The milliseconds to delay.
 @param func:          The function to invoke.
-@returns The timer handle.  Use the [stop] method to cancel the timer.
+
+@returns  The timer handle.
+          Use the [stop] method to cancel the timer.
 ###
 Util.delay = (milliseconds, func) ->
   # Check parameters.
