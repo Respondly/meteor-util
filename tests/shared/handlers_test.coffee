@@ -138,69 +138,69 @@ describe 'Handlers.invoke', ->
     expect(result).to.equal true
 
 
-# describe 'Handlers.invokeAsync', ->
-#   handlers = null
-#   beforeEach -> handlers = new Handlers()
+describe.skip 'Handlers.invokeAsync', ->
+  handlers = null
+  beforeEach -> handlers = new Handlers()
 
-#   it 'invokes returns true when there are no handlers', (done) ->
-#     handlers.invokeAsync (result, err) ->
-#       expect(result).to.equal true
-#       expect(err).to.equal undefined
-#       done()
+  it 'invokes returns true when there are no handlers', (done) ->
+    handlers.invokeAsync (result, err) ->
+      expect(result).to.equal true
+      expect(err).to.equal undefined
+      done()
 
-#   it 'invokes handlers returning true', (done) ->
-#     count = 0
-#     handlers.add (done) ->
-#       count += 1
-#       done()
-#     handlers.add (done) ->
-#       count += 1
-#       APP.delay -> done()
+  it 'invokes handlers returning true', (done) ->
+    count = 0
+    handlers.add (done) ->
+      count += 1
+      done()
+    handlers.add (done) ->
+      count += 1
+      APP.delay -> done()
 
-#     handlers.invokeAsync (result, err) ->
-#       expect(count).to.equal 2
-#       expect(result).to.equal true
-#       done()
-
-
-#   it 'invokes handlers returning false (cancelled)', (done) ->
-#     finalHandlerSkipped = true
-#     handlers.add (done) -> done()
-#     handlers.add (done) -> done(false)
-#     handlers.add (done) -> finalHandlerSkipped = false
-
-#     handlers.invokeAsync (result) ->
-#       expect(result).to.equal false
-#       expect(finalHandlerSkipped).to.equal true
-#       done()
+    handlers.invokeAsync (result, err) ->
+      expect(count).to.equal 2
+      expect(result).to.equal true
+      done()
 
 
-# it 'invokes handlers with arguments', (done) ->
-#   handlers = new Handlers()
-#   obj = {}
-#   context = null
+  it 'invokes handlers returning false (cancelled)', (done) ->
+    finalHandlerSkipped = true
+    handlers.add (done) -> done()
+    handlers.add (done) -> done(false)
+    handlers.add (done) -> finalHandlerSkipped = false
 
-#   param1 = null
-#   param2 = null
-#   handlers.add (p1, p2) ->
-#     param1 = p1
-#     param2 = p2
-#     done()
-
-#   handlers.invokeAsync 123, 'abc', (result) ->
-#     expect(param1).to.equal 123
-#     expect(param2).to.equal 'abc'
-#     done()
-
-# it 'returns true when invoking with no handlers', (done) ->
-#   handlers = new Handlers()
-#   handlers.invokeAsync (result) ->
-#     expect(result).to.equal true
-#     done()
+    handlers.invokeAsync (result) ->
+      expect(result).to.equal false
+      expect(finalHandlerSkipped).to.equal true
+      done()
 
 
+  it 'invokes handlers with arguments', (done) ->
+    handlers = new Handlers()
+    obj = {}
+    context = null
 
-describe 'results', ->
+    param1 = null
+    param2 = null
+    handlers.add (p1, p2) ->
+      param1 = p1
+      param2 = p2
+      done()
+
+    handlers.invokeAsync 123, 'abc', (result) ->
+      expect(param1).to.equal 123
+      expect(param2).to.equal 'abc'
+      done()
+
+  it 'returns true when invoking with no handlers', (done) ->
+    handlers = new Handlers()
+    handlers.invokeAsync (result) ->
+      expect(result).to.equal true
+      done()
+
+
+
+describe 'Handlers.results', ->
   handlers = null
   beforeEach -> handlers = new Handlers()
 
@@ -230,7 +230,7 @@ describe 'results', ->
     expect(results[4]).to.equal fn
 
 
-describe 'firstResult', ->
+describe 'Handlers.firstResult', ->
   handlers = null
   beforeEach -> handlers = new Handlers()
 
