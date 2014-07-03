@@ -1,0 +1,14 @@
+{
+  "name": "util",
+  "description": "Common utility helpers",
+  "homepage": "",
+  "author": "Phil Cockfield (https://github.com/philcockfield)",
+  "version": "0.0.1",
+  "git": "",
+  "packages": {
+    "sugar": {},
+    "munit": {
+      "path": "../../libs/meteor-munit"
+    }
+  }
+}
