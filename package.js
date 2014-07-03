@@ -9,7 +9,7 @@ Package.on_use(function (api) {
   api.export('Util');
 
   // Generated with: github.com/philcockfield/meteor-package-loader
-  api.add_files('shared/api.coffee', ['client', 'server']);
+  api.add_files('shared/exports.coffee', ['client', 'server']);
   api.add_files('shared/handlers.coffee', ['client', 'server']);
   api.add_files('shared/timer.coffee', ['client', 'server']);
 
