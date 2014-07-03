@@ -7,6 +7,12 @@ be given it's own package.
 
 
 
+# Run Tests
+From the package folder:
+
+    mrt test-packages util
+
+
 
 # The MIT License (MIT)
 
