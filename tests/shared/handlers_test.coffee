@@ -138,14 +138,15 @@ describe 'Handlers.invoke', ->
     expect(result).to.equal true
 
 
-describe.skip 'Handlers.invokeAsync', ->
+describe 'Handlers.invokeAsync', ->
   handlers = null
   beforeEach -> handlers = new Handlers()
 
   it 'invokes returns true when there are no handlers', (done) ->
-    handlers.invokeAsync (result, err) ->
-      expect(result).to.equal true
-      expect(err).to.equal undefined
+    handlers.invokeAsync (result, err) =>
+      @try ->
+        expect(result).to.equal true
+        expect(err).to.equal undefined
       done()
 
   it 'invokes handlers returning true', (done) ->
@@ -155,11 +156,12 @@ describe.skip 'Handlers.invokeAsync', ->
       done()
     handlers.add (done) ->
       count += 1
-      APP.delay -> done()
+      Util.delay -> done()
 
-    handlers.invokeAsync (result, err) ->
-      expect(count).to.equal 2
-      expect(result).to.equal true
+    handlers.invokeAsync (result, err) =>
+      @try ->
+        expect(count).to.equal 2
+        expect(result).to.equal true
       done()
 
 
@@ -169,9 +171,10 @@ describe.skip 'Handlers.invokeAsync', ->
     handlers.add (done) -> done(false)
     handlers.add (done) -> finalHandlerSkipped = false
 
-    handlers.invokeAsync (result) ->
-      expect(result).to.equal false
-      expect(finalHandlerSkipped).to.equal true
+    handlers.invokeAsync (result) =>
+      @try ->
+        expect(result).to.equal false
+        expect(finalHandlerSkipped).to.equal true
       done()
 
 
@@ -187,15 +190,17 @@ describe.skip 'Handlers.invokeAsync', ->
       param2 = p2
       done()
 
-    handlers.invokeAsync 123, 'abc', (result) ->
-      expect(param1).to.equal 123
-      expect(param2).to.equal 'abc'
+    handlers.invokeAsync 123, 'abc', (result) =>
+      @try ->
+        expect(param1).to.equal 123
+        expect(param2).to.equal 'abc'
       done()
 
   it 'returns true when invoking with no handlers', (done) ->
     handlers = new Handlers()
-    handlers.invokeAsync (result) ->
-      expect(result).to.equal true
+    handlers.invokeAsync (result) =>
+      @try ->
+        expect(result).to.equal true
       done()
 
 
