@@ -111,55 +111,57 @@ describe.client 'ReactiveHash: reactivity', ->
     Util.delay 0, =>
       hash.set 'foo', null
       Util.delay 0, =>
-        @try ->
-          expect(count).to.equal 2
+        @try -> expect(count).to.equal 2
         done()
 
 
 
-#   it 'does not call dependency for other keys', (done) ->
-#     count = 0
-#     Deps.autorun -> count += 1
+  it 'does not call dependency for other keys', (done) ->
+    count = 0
+    Deps.autorun ->
+          hash.get('foo')
+          count += 1
 
-#     fn = ->
-#       expect(count).to.equal 0
-#       done()
+    count = 0
+    hash.set 'bar', 'value'
 
-#     count = 0
-#     hash.set 'bar', 'value'
-#     Meteor.setTimeout fn, 10
+    Util.delay 0, =>
+      Util.delay 0, =>
+        @try -> expect(count).to.equal 0
+        done()
 
 
-#   it 'call dependencies only when set value is changed ("onlyOnChange" on [options] parameter)', (done) ->
-#     count = 0
-#     Deps.autorun ->
-#             hash.get('foo')
-#             count += 1
-#     count = 0
 
-#     hash.set('foo', 123, onlyOnChange:true)
-#     Util.delay -> hash.set('foo', 123, onlyOnChange:true)
-#     Util.delay 5, -> hash.set('foo', 123, onlyOnChange:true)
+  it 'call dependencies only when set value is changed ("onlyOnChange" on [options] parameter)', (done) ->
+    count = 0
+    Deps.autorun ->
+            hash.get('foo')
+            count += 1
+    count = 0
 
-#     Util.delay 10, ->
-#       expect(count).to.equal 1
-#       done()
+    hash.set('foo', 123, onlyOnChange:true)
+    Util.delay -> hash.set('foo', 123, onlyOnChange:true)
+    Util.delay 5, -> hash.set('foo', 123, onlyOnChange:true)
 
-#   it 'call dependencies only when set value is changed ("onlyOnChange" as default parameter)', (done) ->
-#     hash.onlyOnChange = true
-#     count = 0
-#     Deps.autorun ->
-#             hash.get('foo')
-#             count += 1
-#     count = 0
+    Util.delay 10, =>
+        @try -> expect(count).to.equal 1
+        done()
 
-#     hash.set('foo', 123)
-#     Util.delay -> hash.set('foo', 123)
-#     Util.delay 5, -> hash.set('foo', 123)
+  it 'call dependencies only when set value is changed ("onlyOnChange" as default parameter)', (done) ->
+    hash.onlyOnChange = true
+    count = 0
+    Deps.autorun ->
+            hash.get('foo')
+            count += 1
+    count = 0
 
-#     Util.delay 10, ->
-#       expect(count).to.equal 1
-#       done()
+    hash.set('foo', 123)
+    Util.delay -> hash.set('foo', 123)
+    Util.delay 5, -> hash.set('foo', 123)
+
+    Util.delay 10, =>
+        @try -> expect(count).to.equal 1
+        done()
 
 
 
@@ -189,61 +191,69 @@ describe 'ReactiveHash.prop (reactivity)', ->
   hash = null
   beforeEach -> hash = new ReactiveHash()
 
-  # it 'call dependencies on each change', (done) ->
-  #   fn = (value) -> hash.prop 'foo', value
-  #   count = 0
-  #   Deps.autorun ->
-  #           fn()
-  #           count += 1
-  #           done() if count is 2
-  #   count = 0
-  #   fn(123)
-  #   Util.delay -> fn(123)
 
-  # it 'call dependencies when set to null', (done) ->
-  #   fn = (value) -> hash.prop 'foo', value
-  #   count = 0
-  #   Deps.autorun ->
-  #           fn()
-  #           count += 1
-  #           done() if count is 2
-  #   count = 0
-  #   fn(123)
-  #   Util.delay -> fn(null)
+  it 'call dependencies on each change', (done) ->
+    fn = (value) -> hash.prop 'foo', value
+    count = 0
+    Deps.autorun ->
+            fn() # Read.
+            count += 1
+    count = 0
+    fn(123)
+    Util.delay =>
+      fn(123)
+      Util.delay =>
+        @try -> expect(count).to.equal 2
+        done()
 
 
-#     it 'call dependencies only when changed ("onlyOnChange" on [options] parameter)', (done) ->
-#       fn = (value) -> hash.prop 'foo', value, onlyOnChange:true
-#       count = 0
-#       Deps.autorun ->
-#               fn()
-#               count += 1
-#       count = 0
+  it 'call dependencies when set to null', (done) ->
+    fn = (value) -> hash.prop 'foo', value
+    count = 0
+    Deps.autorun ->
+            fn()
+            count += 1
+    count = 0
+    fn(123)
+    Util.delay =>
+      fn(null)
+      Util.delay =>
+        @try -> expect(count).to.equal 2
+        done()
 
-#       fn(123)
-#       Util.delay -> fn(123)
-#       Util.delay 5, -> fn(123)
 
-#       Util.delay 10, ->
-#         expect(count).to.equal 1
-#         done()
 
-#     it 'call dependencies only when changed ("onlyOnChange" as default parameter)', (done) ->
-#       hash.onlyOnChange = true
-#       fn = (value) -> hash.prop 'foo', value
-#       count = 0
-#       Deps.autorun ->
-#               fn()
-#               count += 1
-#       count = 0
+  it 'call dependencies only when changed ("onlyOnChange" on [options] parameter)', (done) ->
+    fn = (value) -> hash.prop 'foo', value, onlyOnChange:true
+    count = 0
+    Deps.autorun ->
+            fn()
+            count += 1
+    count = 0
+    fn(123)
+    Util.delay -> fn(123)
+    Util.delay 5, -> fn(123)
+    Util.delay 10, =>
+      @try -> expect(count).to.equal 1
+      done()
 
-#       fn(123)
-#       Util.delay -> fn(123)
-#       Util.delay 5, -> fn(123)
 
-#       Util.delay 10, ->
-#         expect(count).to.equal 1
-#         done()
+  it 'call dependencies only when changed ("onlyOnChange" as default parameter)', (done) ->
+    hash.onlyOnChange = true
+    fn = (value) -> hash.prop 'foo', value
+    count = 0
+    Deps.autorun ->
+            fn()
+            count += 1
+    count = 0
+
+    fn(123)
+    Util.delay -> fn(123)
+    Util.delay 5, -> fn(123)
+
+    Util.delay 10, =>
+      @try -> expect(count).to.equal 1
+      done()
 
 
 describe 'storing objects with a [hash] property', ->

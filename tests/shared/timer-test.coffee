@@ -1,6 +1,9 @@
 describe 'Delay (Timer)', ->
+  startedAt = null
+  beforeEach -> startedAt = new Date()
+
+
   it 'delays for a given amount of time', (done) ->
-    startedAt = new Date()
     Util.delay 50, =>
         @try ->
           elapsed = startedAt.millisecondsAgo()
@@ -8,9 +11,10 @@ describe 'Delay (Timer)', ->
         done()
 
 
-  it 'has returns the timer ID', ->
+  it 'returns details about the timer', ->
     result = Util.delay 5, ->
     expect(result.id?).to.equal true
+    expect(result.msecs).to.equal 5
 
 
   it 'stops a timer', (done) ->
@@ -24,7 +28,6 @@ describe 'Delay (Timer)', ->
     Meteor.setTimeout(onTimeout, 50)
 
 
-
-
-
-
+  it 'delays for 0-msecs when no value supplied', ->
+    result = Util.delay ->
+    expect(result.msecs).to.equal 0
