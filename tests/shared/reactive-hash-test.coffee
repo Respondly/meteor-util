@@ -1,7 +1,3 @@
-ReactiveHash = Util.ReactiveHash
-
-
-
 describe 'ReactiveHash: get/set', ->
   hash = null
   beforeEach -> hash = new ReactiveHash()

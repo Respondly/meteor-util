@@ -1,8 +1,11 @@
+### @export ReactiveHash ###
+
+
 ###
 A hash/dictionary that is reactive, but does not persist
 values across hot-code-pushes.
 ###
-class Util.ReactiveHash
+ReactiveHash = class Util.ReactiveHash
   constructor: ->
     @keys = {}
     @_deps = {}
