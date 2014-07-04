@@ -5,7 +5,7 @@
 A hash/dictionary that is reactive, but does not persist
 values across hot-code-pushes.
 ###
-ReactiveHash = class Util.ReactiveHash
+class ReactiveHash
   constructor: ->
     @keys = {}
     @_deps = {}

@@ -8,6 +8,7 @@ Package.on_use(function (api) {
   api.use(['coffeescript', 'sugar']);
   api.export('Util');
   api.export('ReactiveHash');
+  api.export('Handlers');
 
   // Generated with: github.com/philcockfield/meteor-package-loader
   api.add_files('shared/_export.coffee', ['client', 'server']);

@@ -1,6 +1,3 @@
-Handlers = Util.Handlers
-
-
 describe 'Handlers (Init)', ->
   handlers = null
   beforeEach -> handlers = new Handlers()

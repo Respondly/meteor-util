@@ -1,9 +1,10 @@
+### @export Handlers ###
 
 
 ###
 Represents a collection of handler functions.
 ###
-class Util.Handlers
+class Handlers
   ###
   Constructor.
   @param context: The [this] context within which to invoke the handlers.
