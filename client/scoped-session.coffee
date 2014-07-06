@@ -14,10 +14,16 @@ class ScopedSession
   @param namespace: The namespace within which to scope the session values.
   ###
   constructor: (@namespace) ->
+    # Ensure a namespace exists.
     throw new Error('No namespace') if Util.isBlank(@namespace)
+
+    # Prefix with the [ScopedNamespace] identifier.
+    @namespace = "__scoped:#{ @namespace }"
     throw new Error("Scoped session [#{@namespace}] already exists.") if instances[@namespace]?
-    # @_keys = {}
+
+    # Store singleton instance.
     instances[@namespace] = @
+
 
 
   ###

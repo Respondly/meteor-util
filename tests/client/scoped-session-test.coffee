@@ -10,12 +10,12 @@ describe 'ScopedSession: construct/dispose', ->
 
   it 'has a namespace', ->
     session = new ScopedSession('ns')
-    expect(session.namespace).to.equal 'ns'
+    expect(session.namespace).to.equal '__scoped:ns'
 
 
   it 'stores global instance', ->
     session = new ScopedSession('ns')
-    expect(ScopedSession.instances['ns']).to.equal session
+    expect(ScopedSession.instances['__scoped:ns']).to.equal session
 
   it 'removes global instance on dispose', ->
     session = new ScopedSession('ns')
@@ -38,12 +38,12 @@ describe 'ScopedSession: get/set', ->
   afterEach -> session.dispose()
 
   it 'gets a value', ->
-    Session.set 'ns:foo', 123
+    Session.set '__scoped:ns:foo', 123
     expect(session.get('foo')).to.equal 123
 
   it 'sets a value', ->
     session.set 'foo', 'hello'
-    expect(Session.get('ns:foo')).to.equal 'hello'
+    expect(Session.get('__scoped:ns:foo')).to.equal 'hello'
 
   it 'unsets a value', ->
     session.set 'foo', 123
@@ -124,8 +124,8 @@ describe 'ScopedSession: Singleton', ->
     session1 = new ScopedSession('ns1')
     session2 = new ScopedSession('ns2')
 
-    expect(ScopedSession.instances['ns1']).to.exist
-    expect(ScopedSession.instances['ns2']).to.exist
+    expect(ScopedSession.instances['__scoped:ns1']).to.exist
+    expect(ScopedSession.instances['__scoped:ns2']).to.exist
 
     ScopedSession.reset()
 
