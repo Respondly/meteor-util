@@ -29,10 +29,10 @@ Package.on_test(function (api) {
 
   // Generated with: github.com/philcockfield/meteor-package-loader
   api.add_files('tests/shared/_init.coffee', ['client', 'server']);
-  // api.add_files('tests/shared/handlers-test.coffee', ['client', 'server']);
-  // api.add_files('tests/shared/reactive-hash-test.coffee', ['client', 'server']);
-  // api.add_files('tests/shared/timer-test.coffee', ['client', 'server']);
-  // api.add_files('tests/shared/util-test.coffee', ['client', 'server']);
+  api.add_files('tests/shared/handlers-test.coffee', ['client', 'server']);
+  api.add_files('tests/shared/reactive-hash-test.coffee', ['client', 'server']);
+  api.add_files('tests/shared/timer-test.coffee', ['client', 'server']);
+  api.add_files('tests/shared/util-test.coffee', ['client', 'server']);
   api.add_files('tests/client/scoped-session-test.coffee', 'client');
 
 });
