@@ -86,6 +86,25 @@ class ScopedSession
 
 
 
+  ###
+  Gets or sets the value for the given key.
+  @param key:         The unique identifier of the value (this is prefixed with the namespace).
+  @param value:       (optional). The value to set (pass null to remove).
+  @param options:
+            default:  (optional). The default value to return if the session does not contain the value (ie. undefined).
+  ###
+  prop: (key, value, options = {}) ->
+    if value isnt undefined
+      # Write.
+      @set(key, value)
+      return value
+    else
+      # Read only.
+      value = @get(key)
+      return if value isnt undefined then value else options.default
+
+
+
 
 # CLASS METHODS ----------------------------------------------------------------------
 

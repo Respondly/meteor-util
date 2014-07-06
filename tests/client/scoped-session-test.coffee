@@ -75,4 +75,39 @@ describe 'ScopedSession: get/set', ->
 
 
 
+describe 'ScopedSession: [prop] Property helper', ->
+  session = null
+  beforeEach -> session = new ScopedSession('ns')
+  afterEach -> session.dispose()
+
+  it 'read: gets a value', ->
+    session.set 'foo', 123
+    expect(session.prop('foo')).to.equal 123
+
+  it 'read: gets no value (undefined)', ->
+    expect(session.prop('foo')).to.equal undefined
+
+  it 'read: gets a default value', ->
+    expect(session.prop('foo', undefined, default:'hello')).to.equal 'hello'
+
+  it 'read: does not get the default value when the value is null', ->
+    session.prop 'foo', null
+    expect(session.prop('foo', undefined, default:'hello')).to.equal null
+
+  it 'writes a value', ->
+    value = session.prop 'foo', 123
+    expect(value).to.equal 123
+    expect(session.get('foo')).to.equal 123
+
+  it 'writes null', ->
+    value = session.prop 'foo', null
+    expect(value).to.equal null
+    expect(session.get('foo')).to.equal null
+
+  it 'does not write when [undefined] is passed (read operation)', ->
+    session.set 'foo', 123
+    session.prop 'foo', undefined
+    expect(session.get('foo')).to.equal 123
+
+
 
