@@ -1,6 +1,8 @@
 ### @export ReactiveHash ###
 
 
+console.log 'Session.keys', Session.keys
+
 
 
 ###
@@ -18,7 +20,7 @@ class ScopedSession
     throw new Error('No namespace') if Util.isBlank(@namespace)
 
     # Prefix with the [ScopedNamespace] identifier.
-    @namespace = "__scoped:#{ @namespace }"
+    @namespace = "__#{ @namespace }"
     throw new Error("Scoped session [#{@namespace}] already exists.") if instances[@namespace]?
 
     # Store singleton instance.
