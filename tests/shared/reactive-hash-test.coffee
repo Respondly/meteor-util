@@ -256,14 +256,6 @@ describe 'storing objects with a [hash] property', ->
   hash = null
   beforeEach -> hash = new ReactiveHash()
 
-  it 'disregards an object with a simple [hash] object property', ->
-    # NB: Because this is noise passed back from a Handlebars call into the method.
-    fn = (value) -> hash.prop 'foo', value
-    fn(123)
-    expect(fn()).to.equal 123
-    fn({ hash:{} })
-    expect(fn()).to.equal 123
-
   it 'stores a non-object [hash] property', ->
     # NB: Because this is noise passed back from a Handlebars call into the method.
     fn = (value) -> hash.prop 'foo', value

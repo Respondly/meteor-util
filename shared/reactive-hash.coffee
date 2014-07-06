@@ -90,16 +90,6 @@ class ReactiveHash
                                            Default is set by the [defaultOnlySetIfChanged] property.
   ###
   prop: (key, value, options = {}) ->
-    # Ignore values passed in from Handlebars.
-    #   This allows these 'prop' functions to be exposed safely within Template helpers
-    #   without handlebars writing it's default value it passes to functions to the session object.
-    if Util.isObject(value?.hash) # and not (value.hash instanceof ns.ReactiveHash)
-      # Ensure the given [hash] property is a simple object, as would be passed
-      # by Handlebars.  Not anything else, like a derivied object, indicating it was
-      # not coming from Handlebars.
-      if Object.getPrototypeOf(Object.getPrototypeOf(value.hash)) is null
-        value = undefined
-
     if value isnt undefined
       # WRITE.
       @set(key, value, options)
