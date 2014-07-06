@@ -113,6 +113,23 @@ class ScopedSession
 ScopedSession.instances = instances = {}
 
 
+###
+Gets the session object with the given namespace, or creates
+a new instance of it if it does not already exist.
+
+@param namespace: The namespace of the session to retrieve.
+###
+ScopedSession.singleton = (namespace) ->
+  instances[namespace] = new ScopedSession(namespace) unless instances[namespace]?
+  instances[namespace]
+
+
+
+###
+Disposes of all scoped sessions.
+###
+ScopedSession.reset = -> instance.dispose() for key, instance of instances
+
 
 
 

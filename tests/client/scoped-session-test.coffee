@@ -1,4 +1,4 @@
-describe 'ScopedSession: construct/dispose/singleton', ->
+describe 'ScopedSession: construct/dispose', ->
   session = null
   afterEach -> session?.dispose()
 
@@ -108,6 +108,33 @@ describe 'ScopedSession: [prop] Property helper', ->
     session.set 'foo', 123
     session.prop 'foo', undefined
     expect(session.get('foo')).to.equal 123
+
+
+
+describe 'ScopedSession: Singleton', ->
+  afterEach -> ScopedSession.reset()
+
+  it 'retrieves a singleton', ->
+    session1 = ScopedSession.singleton('ns')
+    session2 = ScopedSession.singleton('ns')
+    expect(session1).to.equal session2
+
+
+  it 'dispsoes of all singletons (reset)', ->
+    session1 = new ScopedSession('ns1')
+    session2 = new ScopedSession('ns2')
+
+    expect(ScopedSession.instances['ns1']).to.exist
+    expect(ScopedSession.instances['ns2']).to.exist
+
+    ScopedSession.reset()
+
+    expect(ScopedSession.instances['ns1']).not.to.exist
+    expect(ScopedSession.instances['ns2']).not.to.exist
+
+
+
+
 
 
 
