@@ -1,9 +1,6 @@
 ### @export ReactiveHash ###
 
 
-console.log 'Session.keys', Session.keys
-
-
 
 ###
 Provides a way of accessing the Session object
