@@ -14,7 +14,7 @@ From the package folder:
 
 
 
-# The MIT License (MIT)
+# License (MIT)
 
 Copyright (c) 2014, **Phil Cockfield** and **Tim Haines**
 

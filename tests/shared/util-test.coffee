@@ -60,3 +60,20 @@ describe 'Util.isBlank', ->
     expect(Util.isBlank(1)).to.equal false
     expect(Util.isBlank({})).to.equal false
     expect(Util.isBlank(-> )).to.equal false
+
+
+describe 'Util.params', ->
+  it 'has no params', ->
+    expect(Util.params(-> )).to.eql []
+
+  it 'has two params', ->
+    fn = (one, two) ->
+    expect(Util.params(fn)).to.eql ['one', 'two']
+
+  it 'returns an empty array for (args...)', ->
+    fn = (args...) ->
+    expect(Util.params(fn)).to.eql []
+
+
+
+
