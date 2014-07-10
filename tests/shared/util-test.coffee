@@ -74,6 +74,10 @@ describe 'Util.params', ->
     fn = (args...) ->
     expect(Util.params(fn)).to.eql []
 
+  it 'returns an empty array when a non-function is passed', ->
+    expect(Util.params('foo')).to.eql []
+    expect(Util.params({})).to.eql []
+
 
 
 
