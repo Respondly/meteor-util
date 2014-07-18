@@ -80,4 +80,20 @@ describe 'Util.params', ->
 
 
 
+describe 'Util.hash', ->
+  it 'returns 0 when string is empty', ->
+    expect(Util.hash('')).to.equal 0
+
+  it 'throws when a non-string is passed', ->
+    fn = -> Util.hash({})
+    expect(fn).to.throw(/Can only hash strings/)
+
+  it 'hashes a string multiple times with the same result', ->
+    result1 = Util.hash('foo')
+    result2 = Util.hash('foo')
+    expect(result1).to.equal result2
+
+
+
+
 

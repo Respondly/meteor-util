@@ -48,3 +48,24 @@ Util.params = (func) ->
   result = [] if result is null
   result
 
+
+
+###
+Generates a hash-code for a string.
+
+  See: http://stackoverflow.com/a/7616484/1745661
+
+@param text: The string to convert to a hash.
+@returns the hash code (number).
+###
+Util.hash = (text) ->
+  hash = 0
+  return hash if Object.isString(text) and text.length is 0
+  throw new Error('Can only hash strings') unless Object.isString(text)
+
+  for chr in text
+    chr = chr.charCodeAt(0)
+    hash  = ((hash << 5) - hash) + chr
+    hash |= 0 # Convert to 32-bit integer.
+
+  return hash
