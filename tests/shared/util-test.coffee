@@ -8,6 +8,8 @@ describe 'Util.isObject (true)', ->
     foo = new Foo()
     expect(Util.isObject(foo)).to.equal true
 
+
+
 describe 'Util.isObject (false)', ->
   it 'when string', ->
     expect(Util.isObject('foo')).to.equal false
