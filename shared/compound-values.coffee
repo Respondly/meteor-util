@@ -7,9 +7,18 @@ Converts an array or string to an {width|height} size object.
 @returns { width|height } or null if there is no value.
 ###
 Util.toSize = (value...) ->
-  size = Util.toCompoundNumber(value, { '0':'width', '1':'height' })
-  size?.toStyle = (unit = 'px') -> "width:#{ size.width }#{ unit }; height:#{ size.height }#{ unit };"
-  size
+  if size = Util.toCompoundNumber(value, { '0':'width', '1':'height' })
+    new Util.Size(size.width, size.height)
+  else
+    null
+
+class Util.Size
+  constructor: (@width, @height) ->
+  toStyle: (unit = 'px') -> "width:#{ @width }#{ unit }; height:#{ @height }#{ unit };"
+
+
+
+# ----------------------------------------------------------------------
 
 
 
@@ -22,9 +31,18 @@ Converts an array or string into a { left|top } object
 @returns { left|top } or null if there is no value.
 ###
 Util.toPosition = (value...) ->
-  position = Util.toCompoundNumber(value, { '0':'left', '1':'top' })
-  position?.toStyle = (unit = 'px') -> "left:#{ position.left }#{ unit }; top:#{ position.top }#{ unit };"
-  position
+  if position = Util.toCompoundNumber(value, { '0':'left', '1':'top' })
+    new Util.Position(position.left, position.top)
+  else
+    null
+
+class Util.Position
+  constructor: (@left, @top) ->
+  toStyle: (unit = 'px') -> "left:#{ @left }#{ unit }; top:#{ @top }#{ unit };"
+
+
+
+# ----------------------------------------------------------------------
 
 
 
@@ -38,11 +56,19 @@ Converts an array or string into a { left|top|width|height } object
 ###
 
 Util.toRect = (value...) ->
-  rect = Util.toCompoundNumber(value, { '0':'left', '1':'top', '2':'width', '3':'height' })
-  rect?.toStyle = (unit = 'px') ->
-    "left:#{ rect.left }#{ unit }; top:#{ rect.top }#{ unit }; width:#{ rect.width }#{ unit }; height:#{ rect.height }#{ unit };"
-  rect
+  if rect = Util.toCompoundNumber(value, { '0':'left', '1':'top', '2':'width', '3':'height' })
+    new Util.Rectangle(rect.left, rect.top, rect.width, rect.height)
+  else
+    null
 
+
+class Util.Rectangle
+  constructor: (@left, @top, @width, @height) ->
+  toStyle: (unit = 'px') -> "left:#{ @left }#{ unit }; top:#{ @top }#{ unit }; width:#{ @width }#{ unit }; height:#{ @height }#{ unit };"
+
+
+
+# ----------------------------------------------------------------------
 
 
 ###
@@ -55,6 +81,9 @@ Converts an array or string to an {x|y} size object.
 ###
 Util.toXY = (value...) -> Util.toCompoundNumber(value, { '0':'x', '1':'y' })
 
+
+
+# ----------------------------------------------------------------------
 
 
 ###

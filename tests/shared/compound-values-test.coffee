@@ -128,14 +128,16 @@ describe 'Common compound values', ->
     expect(Util.toXY()).to.equal null
 
 
-  it 'converts [toPosition]', ->
+  it 'converts [toRect]', ->
     expect(Util.toRect(10, 20, 30, 40)).to.have.property 'left', 10
     expect(Util.toRect(10, 20, 30, 40)).to.have.property 'top', 20
     expect(Util.toRect(10, 20, 30, 40)).to.have.property 'width', 30
     expect(Util.toRect(10, 20, 30, 40)).to.have.property 'height', 40
+    expect(Util.toRect('   ')).to.equal null
+    expect(Util.toRect()).to.equal null
 
 
-  it 'converts [toPosition].toStyle()', ->
+  it 'converts [toRect].toStyle()', ->
     expect(Util.toRect(10, 20, 30, 40).toStyle()).to.equal "left:10px; top:20px; width:30px; height:40px;"
 
 
