@@ -13,6 +13,7 @@ Package.on_use(function (api) {
 
   // Generated with: github.com/philcockfield/meteor-package-loader
   api.add_files('shared/_export.coffee', ['client', 'server']);
+  api.add_files('shared/conversion.coffee', ['client', 'server']);
   api.add_files('shared/handlers.coffee', ['client', 'server']);
   api.add_files('shared/reactive-hash.coffee', ['client', 'server']);
   api.add_files('shared/timer.coffee', ['client', 'server']);
@@ -29,6 +30,7 @@ Package.on_test(function (api) {
 
   // Generated with: github.com/philcockfield/meteor-package-loader
   api.add_files('tests/shared/_init.coffee', ['client', 'server']);
+  api.add_files('tests/shared/conversion-test.coffee', ['client', 'server']);
   api.add_files('tests/shared/handlers-test.coffee', ['client', 'server']);
   api.add_files('tests/shared/reactive-hash-test.coffee', ['client', 'server']);
   api.add_files('tests/shared/timer-test.coffee', ['client', 'server']);
