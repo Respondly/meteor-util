@@ -98,6 +98,9 @@ describe 'Common compound values', ->
     expect(Util.toSize(10, 20).toStyle()).to.equal "width:10px; height:20px;"
 
 
+  # ----------------------------------------------------------------------
+
+
   it 'converts [toPosition]', ->
     expect(Util.toPosition(10, 20)).to.have.property 'left', 10
     expect(Util.toPosition(10, 20)).to.have.property 'top', 20
@@ -119,6 +122,9 @@ describe 'Common compound values', ->
     expect(Util.toPosition(10, 20).toStyle()).to.equal "left:10px; top:20px;"
 
 
+  # ----------------------------------------------------------------------
+
+
   it 'converts [toXY]', ->
     expect(Util.toXY(10, 20)).to.eql { x:10, y:20 }
     expect(Util.toXY(10)).to.eql { x:10, y:10 }
@@ -126,6 +132,9 @@ describe 'Common compound values', ->
     expect(Util.toXY('10, 20')).to.eql { x:10, y:20 }
     expect(Util.toXY('  ')).to.equal null
     expect(Util.toXY()).to.equal null
+
+
+  # ----------------------------------------------------------------------
 
 
   it 'converts [toRect]', ->
@@ -141,6 +150,12 @@ describe 'Common compound values', ->
     expect(Util.toRect(10, 20, 30, 40).toStyle()).to.equal "left:10px; top:20px; width:30px; height:40px;"
 
 
+  # ----------------------------------------------------------------------
 
 
+  it 'converts [toAlignment]', ->
+    expect(Util.toAlignment('center, middle')).to.have.property 'x', 'center'
+    expect(Util.toAlignment('left,bottom')).to.have.property 'y', 'bottom'
+    expect(Util.toAlignment('   ')).to.equal null
+    expect(Util.toAlignment()).to.equal null
 

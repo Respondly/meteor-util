@@ -83,6 +83,37 @@ Util.toXY = (value...) -> Util.toCompoundNumber(value, { '0':'x', '1':'y' })
 
 
 
+
+# ----------------------------------------------------------------------
+
+
+###
+Converts an array or string into { x:y } alignment values.
+@param value: Either
+                  - an object {x|y}: no change
+                  - array [x, y] eg ['center', 'middle']
+                  - string: 'center,middle'
+              Horizontal values (x):
+                  - left
+                  - center
+                  - right
+              Vertical values (y):
+                  - top
+                  - middle
+                  - bottom
+###
+Util.toAlignment = (value...) ->
+  if alignment = Util.toCompoundValue(value, { '0':'x', '1':'y' })
+    new Util.Alignment(alignment.x, alignment.y)
+  else
+    null
+
+
+class Util.Alignment
+  constructor: (@x, @y) ->
+
+
+
 # ----------------------------------------------------------------------
 
 
