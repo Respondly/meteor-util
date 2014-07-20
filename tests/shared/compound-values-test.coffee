@@ -34,6 +34,8 @@ describe 'Util.toCompoundValue', ->
     result = Util.toCompoundValue(foo, { '0':'one', '1':'two' })
     expect(result).to.equal foo
 
+
+
 describe 'Util.toCompoundValue (string parsing)', ->
   it 'returns [null] when no value is passed', ->
     expect(Util.toCompoundValue('', { '0':'one' })).to.equal null
@@ -58,6 +60,7 @@ describe 'Util.toCompoundValue (string parsing)', ->
     expect(result.three).to.equal '2'
 
 
+
 describe 'Util.toCompoundNumber', ->
   it 'converts from string (single)', ->
     result = Util.toCompoundNumber('1', { '0':'one', '1':'two' })
@@ -74,6 +77,7 @@ describe 'Util.toCompoundNumber', ->
     expect(Util.toCompoundNumber('')).to.equal null
     expect(Util.toCompoundNumber('', { '0':'one', '1':'two' })).to.equal null
     expect(Util.toCompoundNumber('  ', { '0':'one', '1':'two' })).to.equal null
+
 
 
 describe 'Common compound values', ->
@@ -148,6 +152,18 @@ describe 'Common compound values', ->
 
   it 'converts [toRect].toStyle()', ->
     expect(Util.toRect(10, 20, 30, 40).toStyle()).to.equal "left:10px; top:20px; width:30px; height:40px;"
+
+
+  # ----------------------------------------------------------------------
+
+
+  it 'converts [toSpacing]', ->
+    expect(Util.toSpacing(10, 20, 30, 40)).to.have.property 'left', 10
+    expect(Util.toSpacing(10, 20, 30, 40)).to.have.property 'top', 20
+    expect(Util.toSpacing(10, 20, 30, 40)).to.have.property 'right', 30
+    expect(Util.toSpacing(10, 20, 30, 40)).to.have.property 'bottom', 40
+    expect(Util.toSpacing('   ')).to.equal null
+    expect(Util.toSpacing()).to.equal null
 
 
   # ----------------------------------------------------------------------

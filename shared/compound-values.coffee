@@ -72,6 +72,30 @@ class Util.Rectangle
 
 
 ###
+Converts an array or string into a { left|top|right|bottom } object
+@param value: Either
+                - an object {left|top|right|bottom}: no change
+                - array [left, top], eg. [20, 30, 10, 5] => {left:20, top:30, width:10, height:5}
+                - string: '30,40, 10, 5'
+@returns { left|top|right|bottom } or null if there is no value.
+###
+
+Util.toSpacing = (value...) ->
+  if rect = Util.toCompoundNumber(value, { '0':'left', '1':'top', '2':'right', '3':'bottom' })
+    new Util.Spacing(rect.left, rect.top, rect.right, rect.bottom)
+  else
+    null
+
+
+class Util.Spacing
+  constructor: (@left, @top, @right, @bottom) ->
+
+
+
+# ----------------------------------------------------------------------
+
+
+###
 Converts an array or string to an {x|y} size object.
 @param value:  Either
                 - an object {x|y}: no change
