@@ -166,12 +166,14 @@ describe 'ReactiveHash.prop', ->
   hash = null
   beforeEach -> hash = new ReactiveHash()
 
-
-  it 'reads and write to the prop', ->
+  it 'reads and writes to the prop', ->
     fn = (value) -> hash.prop 'foo', value
     fn(123)
     expect(fn()).to.equal 123
     expect(hash.keys.foo).to.equal 123
+
+    fn(undefined)
+    expect(fn()).to.equal 123
 
   it 'has a default value', ->
     fn = (value) -> hash.prop 'foo', value, default:'hello'

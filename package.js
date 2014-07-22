@@ -10,6 +10,7 @@ Package.on_use(function (api) {
   api.export('ReactiveHash');
   api.export('Handlers');
   api.export('ScopedSession');
+  api.export('LocalStorage');
 
   // Generated with: github.com/philcockfield/meteor-package-loader
   api.add_files('shared/_export.coffee', ['client', 'server']);
@@ -18,6 +19,7 @@ Package.on_use(function (api) {
   api.add_files('shared/reactive-hash.coffee', ['client', 'server']);
   api.add_files('shared/timer.coffee', ['client', 'server']);
   api.add_files('shared/util.coffee', ['client', 'server']);
+  api.add_files('client/local-storage.coffee', 'client');
   api.add_files('client/scoped-session.coffee', 'client');
 
 });
@@ -35,6 +37,7 @@ Package.on_test(function (api) {
   api.add_files('tests/shared/reactive-hash-test.coffee', ['client', 'server']);
   api.add_files('tests/shared/timer-test.coffee', ['client', 'server']);
   api.add_files('tests/shared/util-test.coffee', ['client', 'server']);
+  api.add_files('tests/client/local-storage-test.coffee', 'client');
   api.add_files('tests/client/scoped-session-test.coffee', 'client');
 
 });
