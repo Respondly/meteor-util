@@ -12,7 +12,7 @@ Package.on_use(function (api) {
   api.export('ScopedSession');
   api.export('LocalStorage');
 
-  // Generated with: github.com/philcockfield/meteor-package-loader
+  // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('shared/_export.coffee', ['client', 'server']);
   api.add_files('shared/compound-values.coffee', ['client', 'server']);
   api.add_files('shared/handlers.coffee', ['client', 'server']);
@@ -30,7 +30,7 @@ Package.on_test(function (api) {
   api.use(['munit', 'coffeescript']);
   api.use('util');
 
-  // Generated with: github.com/philcockfield/meteor-package-loader
+  // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('tests/shared/_init.coffee', ['client', 'server']);
   api.add_files('tests/shared/compound-values-test.coffee', ['client', 'server']);
   api.add_files('tests/shared/handlers-test.coffee', ['client', 'server']);
