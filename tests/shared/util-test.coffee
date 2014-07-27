@@ -97,5 +97,25 @@ describe 'Util.hash', ->
 
 
 
+describe 'Util.asValue', ->
+  it 'return undefined/null', ->
+    expect(Util.asValue()).to.equal undefined
+    expect(Util.asValue(null)).to.equal null
+
+  it 'returns a simple value', ->
+    expect(Util.asValue('foo')).to.equal 'foo'
+    expect(Util.asValue(' ')).to.equal ' '
+    expect(Util.asValue(123)).to.equal 123
+    expect(Util.asValue({foo:123})).to.eql {foo:123}
+    expect(Util.asValue([1,2,3])).to.eql [1,2,3]
+
+  it 'returns the result of a function', ->
+    expect(Util.asValue(-> 123)).to.equal 123
+
+  it 'returns a curried function', ->
+    fn = -> 123
+    expect(Util.asValue(-> fn)).to.equal fn
+    expect(Util.asValue(-> fn)()).to.equal 123
+
 
 

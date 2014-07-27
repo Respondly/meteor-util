@@ -1,4 +1,19 @@
 ###
+Examines a value, and if it's a function, executes it.
+@param value:        The value to operate on.
+@param defaultValue: Optional.  Value to return if a value is not specified or derived from the function.
+###
+Util.asValue = (value, defaultValue) ->
+  value = value() if Object.isFunction(value)
+  if value is undefined
+    defaultValue
+  else
+    value
+
+
+
+
+###
 Determines whether the given value an object (literal or derived).
 
 @param value: The value to examine.
