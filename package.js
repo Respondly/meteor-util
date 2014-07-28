@@ -19,6 +19,7 @@ Package.on_use(function (api) {
   api.add_files('shared/reactive-hash.coffee', ['client', 'server']);
   api.add_files('shared/timer.coffee', ['client', 'server']);
   api.add_files('shared/util.coffee', ['client', 'server']);
+  api.add_files('client/events.coffee', 'client');
   api.add_files('client/local-storage.coffee', 'client');
   api.add_files('client/scoped-session.coffee', 'client');
 
