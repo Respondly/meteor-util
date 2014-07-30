@@ -1,5 +1,5 @@
 ###
-Provides a more convenient way of settings a timeout.
+Provides a more convenient way of setting a timeout.
 
 @param msecs:  The milliseconds to delay.
 @param func:   The function to invoke.
