@@ -79,11 +79,25 @@ describe 'Handlers.remove', ->
     handlers.add ->
     handlers.add ->
     handlers.add ->
-
     expect(handlers.items.length).to.equal 3
     handlers.dispose()
-
     expect(handlers.items.length).to.equal 0
+
+
+
+describe 'Handlers.clear', ->
+  handlers = null
+  beforeEach -> handlers = new Handlers()
+
+  it 'removes all handlers', ->
+    handlers.add ->
+    handlers.add ->
+    handlers.add ->
+    expect(handlers.items.length).to.equal 3
+    handlers.clear()
+    expect(handlers.items.length).to.equal 0
+
+
 
 
 

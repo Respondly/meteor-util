@@ -1,6 +1,3 @@
-### @export Handlers ###
-
-
 ###
 Represents a collection of handler functions.
 ###
@@ -16,7 +13,7 @@ class Handlers
 
 
   dispose: ->
-    @items = []
+    @clear()
     @isDisposed = true
 
 
@@ -62,6 +59,12 @@ class Handlers
     @items.remove(handle) if handle
     handle?
 
+
+  ###
+  Removes all functions from the collection.
+  ###
+  clear: ->
+    @items = []
 
 
   ###
