@@ -60,6 +60,8 @@ describe 'Util.toCompoundValue (string parsing)', ->
     expect(result.three).to.equal '2'
 
 
+# ----------------------------------------------------------------------
+
 
 describe 'Util.toCompoundNumber', ->
   it 'converts from string (single)', ->
@@ -78,6 +80,18 @@ describe 'Util.toCompoundNumber', ->
     expect(Util.toCompoundNumber('', { '0':'one', '1':'two' })).to.equal null
     expect(Util.toCompoundNumber('  ', { '0':'one', '1':'two' })).to.equal null
 
+  it 'extracts unit values (% - single character)', ->
+    result = Util.toCompoundNumber('100%', { '0':'x' })
+    expect(result.x).to.equal 100
+    expect(result.xUnit).to.equal '%'
+
+  it 'extracts unit values (px - two characters)', ->
+    result = Util.toCompoundNumber('100px', { '0':'x' })
+    expect(result.x).to.equal 100
+    expect(result.xUnit).to.equal 'px'
+
+
+# ----------------------------------------------------------------------
 
 
 describe 'Common compound values', ->
@@ -100,6 +114,9 @@ describe 'Common compound values', ->
     expect(Util.toSize('10,auto').width).to.equal 10
     expect(Util.toSize('10, auto').height).to.equal undefined
 
+    expect(Util.toSize('10px,50').width).to.equal 10
+    expect(Util.toSize('10em,50').widthUnit).to.equal 'em'
+
     expect(Util.toSize()).to.equal null
     expect(Util.toSize('  ')).to.equal null
 
@@ -109,7 +126,7 @@ describe 'Common compound values', ->
     expect(Util.toSize(10, 'auto').toStyle()).to.equal "width:10px;"
     expect(Util.toSize('auto', 10).toStyle()).to.equal "height:10px;"
     expect(Util.toSize('auto', 'auto').toStyle()).to.equal ""
-
+    expect(Util.toSize(10, '20%').toStyle()).to.equal "width:10px; height:20%;"
 
 
   # ----------------------------------------------------------------------

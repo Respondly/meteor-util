@@ -53,7 +53,7 @@ class ReactiveHash
   Same as calling 'set' with undefined.
   @param key:   The unique identifier of the value (this is prefixed with the namespace).
   ###
-  unset: (key) => @set( key, undefined )
+  unset: (key) => @set(key, undefined)
 
 
   ###

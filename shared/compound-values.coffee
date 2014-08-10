@@ -1,4 +1,45 @@
 ###
+Base class for compound values.
+###
+class Util.CompoundValue
+  constructor: (compoundValue) ->
+    # Copy values.
+    if compoundValue
+      for key, value of compoundValue
+        @[key] = value
+
+  ###
+  Converts the value to a string.
+  @param prop         (optional) The specific property to convert.
+  @param defaultUnit: (optional) The default unit to append to values.
+  ###
+  toString: (prop, defaultUnit = '') ->
+    result = []
+    for key, value of @
+      if text = @toValueString(key, defaultUnit)
+        result.push("#{ key }:#{ text }")
+    "[#{ result.compact().join('').trim() }]"
+
+
+
+  ###
+  Converts the value to a string.
+  @param prop         (optional) The specific property to convert.
+  @param defaultUnit: (optional) The default unit to append to values.
+  ###
+  toValueString: (prop, defaultUnit = '') ->
+    return null if prop.endsWith('Unit')
+    return null if Object.isFunction(@[prop])
+    unit = @["#{prop}Unit"]
+    unit ?= defaultUnit
+    "#{ @[prop] }#{ unit }"
+
+
+
+# ----------------------------------------------------------------------
+
+
+###
 Converts an array or string to an {width|height} size object.
 @param value:  Either
                 - an object {width|height}: no change
@@ -8,12 +49,12 @@ Converts an array or string to an {width|height} size object.
 ###
 Util.toSize = (value...) ->
   if size = Util.toCompoundNumber(value, { '0':'width', '1':'height' })
-    new Util.Size(size.width, size.height)
+    new Util.Size(size)
   else
     null
 
-class Util.Size
-  constructor: (@width, @height) ->
+
+class Util.Size extends Util.CompoundValue
   toStyle: (unit = 'px') -> toStyle(@, unit, 'width', 'height')
 
 
@@ -32,12 +73,11 @@ Converts an array or string into a { left|top } object
 ###
 Util.toPosition = (value...) ->
   if position = Util.toCompoundNumber(value, { '0':'left', '1':'top' })
-    new Util.Position(position.left, position.top)
+    new Util.Position(position)
   else
     null
 
-class Util.Position
-  constructor: (@left, @top) ->
+class Util.Position extends Util.CompoundValue
   toStyle: (unit = 'px') -> toStyle(@, unit, 'left', 'top')
 
 
@@ -57,13 +97,12 @@ Converts an array or string into a { left|top|width|height } object
 
 Util.toRect = (value...) ->
   if rect = Util.toCompoundNumber(value, { '0':'left', '1':'top', '2':'width', '3':'height' })
-    new Util.Rectangle(rect.left, rect.top, rect.width, rect.height)
+    new Util.Rectangle(rect)
   else
     null
 
 
-class Util.Rectangle
-  constructor: (@left, @top, @width, @height) ->
+class Util.Rectangle extends Util.CompoundValue
   toStyle: (unit = 'px') -> toStyle(@, unit, 'left', 'top', 'width', 'height')
 
 
@@ -82,13 +121,12 @@ Converts an array or string into a { left|top|right|bottom } object
 
 Util.toSpacing = (value...) ->
   if rect = Util.toCompoundNumber(value, { '0':'left', '1':'top', '2':'right', '3':'bottom' })
-    new Util.Spacing(rect.left, rect.top, rect.right, rect.bottom)
+    new Util.Spacing(rect)
   else
     null
 
 
-class Util.Spacing
-  constructor: (@left, @top, @right, @bottom) ->
+class Util.Spacing extends Util.CompoundValue
 
 
 
@@ -128,13 +166,12 @@ Converts an array or string into { x:y } alignment values.
 ###
 Util.toAlignment = (value...) ->
   if alignment = Util.toCompoundValue(value, { '0':'x', '1':'y' })
-    new Util.Alignment(alignment.x, alignment.y)
+    new Util.Alignment(alignment)
   else
     null
 
 
-class Util.Alignment
-  constructor: (@x, @y) ->
+class Util.Alignment extends Util.CompoundValue
 
 
 
@@ -189,6 +226,12 @@ Util.toCompoundNumber = (value..., keyNameMap = {}) ->
   for own key, value of result
     number = value?.toNumber()
     number = undefined if Object.isNaN(number)
+    if number?
+      valueAsString = value.toString()
+      numberAsString = number.toString()
+      if valueAsString.length isnt numberAsString.length
+        unit = value.substring(numberAsString.length, valueAsString.length)
+        result["#{key}Unit"] = unit
     result[key] = number
   result
 
@@ -197,13 +240,12 @@ Util.toCompoundNumber = (value..., keyNameMap = {}) ->
 # PRIVATE ----------------------------------------------------------------------
 
 
-toStyle = (obj, unit, props...) ->
+toStyle = (obj, defaultUnit, props...) ->
   result = ''
   for key in props
-    if value = obj[key]
-      result += "#{ key }:#{ value }#{ unit }; "
-
-
+    if obj[key]?
+      if value = obj.toValueString(key, defaultUnit)
+        result += "#{ key }:#{ value }; "
   result.trim()
 
 
