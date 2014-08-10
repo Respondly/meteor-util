@@ -94,12 +94,22 @@ describe 'Common compound values', ->
     expect(Util.toSize('10, 20')).to.have.property 'width', 10
     expect(Util.toSize('10,20')).to.have.property 'height', 20
 
+    expect(Util.toSize('auto, 10').width).to.equal undefined
+    expect(Util.toSize('auto, 10').height).to.equal 10
+
+    expect(Util.toSize('10,auto').width).to.equal 10
+    expect(Util.toSize('10, auto').height).to.equal undefined
+
     expect(Util.toSize()).to.equal null
     expect(Util.toSize('  ')).to.equal null
 
 
   it 'converts [toSize].toStyle()', ->
     expect(Util.toSize(10, 20).toStyle()).to.equal "width:10px; height:20px;"
+    expect(Util.toSize(10, 'auto').toStyle()).to.equal "width:10px;"
+    expect(Util.toSize('auto', 10).toStyle()).to.equal "height:10px;"
+    expect(Util.toSize('auto', 'auto').toStyle()).to.equal ""
+
 
 
   # ----------------------------------------------------------------------
@@ -124,6 +134,7 @@ describe 'Common compound values', ->
 
   it 'converts [toPosition].toStyle()', ->
     expect(Util.toPosition(10, 20).toStyle()).to.equal "left:10px; top:20px;"
+    expect(Util.toPosition('auto', 20).toStyle()).to.equal "top:20px;"
 
 
   # ----------------------------------------------------------------------
@@ -152,6 +163,7 @@ describe 'Common compound values', ->
 
   it 'converts [toRect].toStyle()', ->
     expect(Util.toRect(10, 20, 30, 40).toStyle()).to.equal "left:10px; top:20px; width:30px; height:40px;"
+    expect(Util.toRect(10, 'auto', 30, 40).toStyle()).to.equal "left:10px; width:30px; height:40px;"
 
 
   # ----------------------------------------------------------------------

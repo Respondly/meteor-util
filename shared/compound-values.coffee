@@ -14,7 +14,7 @@ Util.toSize = (value...) ->
 
 class Util.Size
   constructor: (@width, @height) ->
-  toStyle: (unit = 'px') -> "width:#{ @width }#{ unit }; height:#{ @height }#{ unit };"
+  toStyle: (unit = 'px') -> toStyle(@, unit, 'width', 'height')
 
 
 
@@ -38,7 +38,7 @@ Util.toPosition = (value...) ->
 
 class Util.Position
   constructor: (@left, @top) ->
-  toStyle: (unit = 'px') -> "left:#{ @left }#{ unit }; top:#{ @top }#{ unit };"
+  toStyle: (unit = 'px') -> toStyle(@, unit, 'left', 'top')
 
 
 
@@ -64,7 +64,7 @@ Util.toRect = (value...) ->
 
 class Util.Rectangle
   constructor: (@left, @top, @width, @height) ->
-  toStyle: (unit = 'px') -> "left:#{ @left }#{ unit }; top:#{ @top }#{ unit }; width:#{ @width }#{ unit }; height:#{ @height }#{ unit };"
+  toStyle: (unit = 'px') -> toStyle(@, unit, 'left', 'top', 'width', 'height')
 
 
 
@@ -187,5 +187,23 @@ A version of [toCompoundValue] that converts values to numbers.
 Util.toCompoundNumber = (value..., keyNameMap = {}) ->
   result = Util.toCompoundValue(value, keyNameMap)
   for own key, value of result
-    result[key] = value?.toNumber()
+    number = value?.toNumber()
+    number = undefined if Object.isNaN(number)
+    result[key] = number
   result
+
+
+
+# PRIVATE ----------------------------------------------------------------------
+
+
+toStyle = (obj, unit, props...) ->
+  result = ''
+  for key in props
+    if value = obj[key]
+      result += "#{ key }:#{ value }#{ unit }; "
+
+
+  result.trim()
+
+
