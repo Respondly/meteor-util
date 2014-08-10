@@ -1,3 +1,7 @@
+#= base
+Util = {} unless Util?
+
+
 ###
 Examines a value, and if it's a function, executes it.
 @param value:        The value to operate on.

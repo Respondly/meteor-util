@@ -1,6 +1,3 @@
-### @export ReactiveHash ###
-
-
 ###
 A hash/dictionary that is reactive, but does not persist
 values across hot-code-pushes.
