@@ -2,6 +2,7 @@ Package.describe({
   summary: 'Common utility helpers.'
 });
 
+
 Npm.depends({
   'colors': '0.6.0-1'
 });
@@ -21,14 +22,20 @@ Package.on_use(function (api) {
   api.export('UserAgent');
   api.export('KeyboardController');
   api.export('Const');
+  api.export('PageJS');
+  api.export('QueryString');
+  api.export('Url');
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('shared/util.coffee', ['client', 'server']);
   api.add_files('shared/ns.coffee', ['client', 'server']);
   api.add_files('shared/classes/auto-run.coffee', ['client', 'server']);
   api.add_files('shared/classes/handlers.coffee', ['client', 'server']);
+  api.add_files('shared/classes/page-js.js', ['client', 'server']);
+  api.add_files('shared/classes/query-string.coffee', ['client', 'server']);
   api.add_files('shared/classes/reactive-array.coffee', ['client', 'server']);
   api.add_files('shared/classes/reactive-hash.coffee', ['client', 'server']);
+  api.add_files('shared/classes/url.coffee', ['client', 'server']);
   api.add_files('shared/const/const.coffee', ['client', 'server']);
   api.add_files('shared/const/const-keys.coffee', ['client', 'server']);
   api.add_files('shared/client-settings.shared.coffee', ['client', 'server']);
