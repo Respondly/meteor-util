@@ -1,7 +1,3 @@
-### @export ReactiveHash ###
-
-
-
 ###
 Provides a way of accessing the Session object
 within a scoped namespace.

@@ -72,7 +72,7 @@ Util.params = (func) ->
 ###
 Generates a hash-code for a string.
 
-  See: http://stackoverflow.com/a/7616484/1745661
+  See: http://stackoverflow.com/a/15710692
 
 @param text: The string to convert to a hash.
 @returns the hash code (number).
@@ -82,9 +82,68 @@ Util.hash = (text) ->
   return hash if Object.isString(text) and text.length is 0
   throw new Error('Can only hash strings') unless Object.isString(text)
 
-  for chr in text
-    chr = chr.charCodeAt(0)
-    hash  = ((hash << 5) - hash) + chr
-    hash |= 0 # Convert to 32-bit integer.
+  text.split("").reduce(
+    (a,b) ->
+      a=((a<<5)-a)+b.charCodeAt(0)
+      return a&a
+    ,0)
 
-  return hash
+
+
+
+###
+Creates a deep clone of the given object, including clones of all child
+objects within the hierarchy.
+
+@param value: The object or array to clone.
+@returns the cloned value if it is clonable, otherwise the original value.
+###
+Util.clone = (value) ->
+  return value unless value?
+
+  # Clone array.
+  return value.clone() if Object.isArray(value)
+
+  # Clone date.
+  return value.clone() if Object.isDate(value)
+
+  # Clone object.
+  if Util.isObject(value)
+    result = {}
+    for key, item of value
+      item = Util.clone(item) if Object.isArray(item) or Util.isObject(item) or Object.isDate(item)
+      result[key] = item
+    return result
+
+  # Finish up - NOT clonable.
+  return value
+
+
+
+###
+Derives the ID from a value.
+@param value: The value to examine, finding (in order):
+                - {}.id
+                - {}._id
+                - <original-value>
+###
+Util.toId = (value) ->
+  objectId = ->
+        return value.id if value.id
+        return value._id if value._id
+
+  if Util.isObject(value)
+    result = Util.asValue(objectId())
+
+  else if Object.isFunction(value)
+    result = Util.toId(Util.asValue(value))
+
+  else
+    result = value # Primitive value.
+
+  # Finish up.
+  result
+
+
+
+

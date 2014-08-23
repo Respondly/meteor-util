@@ -18,7 +18,7 @@ class Util.CompoundValue
     for key, value of @
       if text = @toValueString(key, defaultUnit)
         result.push("#{ key }:#{ text }")
-    "[#{ result.compact().join('').trim() }]"
+    "[#{ result.compact().join(', ').trim() }]"
 
 
 
@@ -149,6 +149,40 @@ Util.toXY = (value...) -> Util.toCompoundNumber(value, { '0':'x', '1':'y' })
 # ----------------------------------------------------------------------
 
 
+
+###
+Converts an array or string to an {x|y} boolean object
+indicating which plan(s) to scroll on.
+@param value:  Either
+                - an object {x|y}: no change
+                - string, eg: 'false, true'
+                - array [x, y], eg. [false,  true] => {x:false, y:true}
+                - single boolean, eg. true => {x:true, y:true}
+@returns { x|y } or null if there is no value.
+###
+Util.toScroll = (value...) ->
+  if scroll = Util.toCompoundValue(value, { '0':'x', '1':'y' })
+    scroll = new Util.Scroll(scroll)
+    scroll.x = Util.toBool(scroll.x)
+    scroll.y = Util.toBool(scroll.y)
+    scroll
+  else
+    null
+
+
+
+class Util.Scroll extends Util.CompoundValue
+  toStyle: ->
+    "overflow-x:#{ toOverflow(@x) }; overflow-y:#{ toOverflow(@y) };"
+
+  isScrolling: -> if @x or @y then true else false
+
+toOverflow = (bool) -> if bool then 'auto' else 'hidden'
+
+
+# ----------------------------------------------------------------------
+
+
 ###
 Converts an array or string into { x:y } alignment values.
 @param value: Either
@@ -172,7 +206,6 @@ Util.toAlignment = (value...) ->
 
 
 class Util.Alignment extends Util.CompoundValue
-
 
 
 # ----------------------------------------------------------------------

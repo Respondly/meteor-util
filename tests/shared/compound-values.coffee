@@ -129,6 +129,7 @@ describe 'Common compound values', ->
     expect(Util.toSize(10, '20%').toStyle()).to.equal "width:10px; height:20%;"
 
 
+
   # ----------------------------------------------------------------------
 
 
@@ -203,4 +204,42 @@ describe 'Common compound values', ->
     expect(Util.toAlignment('left,bottom')).to.have.property 'y', 'bottom'
     expect(Util.toAlignment('   ')).to.equal null
     expect(Util.toAlignment()).to.equal null
+
+
+  # ----------------------------------------------------------------------
+
+
+  it 'converts [toScroll]', ->
+    expect(Util.toScroll(false, true)).to.have.property 'x', false
+    expect(Util.toScroll(false, true)).to.have.property 'y', true
+
+    expect(Util.toScroll('false, true')).to.have.property 'x', false
+    expect(Util.toScroll('false, true')).to.have.property 'y', true
+
+    expect(Util.toScroll(true)).to.have.property 'x', true
+    expect(Util.toScroll(true)).to.have.property 'y', true
+
+    expect(Util.toScroll('   ')).to.equal null
+    expect(Util.toScroll()).to.equal null
+
+
+  it 'converts [toScroll].toStyle()', ->
+    expect(Util.toScroll(false, true).toStyle()).to.equal 'overflow-x:hidden; overflow-y:auto;'
+    expect(Util.toScroll(true).toStyle()).to.equal 'overflow-x:auto; overflow-y:auto;'
+
+
+  it '[toScroll] is scrolling', ->
+    expect(Util.toScroll(true).isScrolling()).to.equal true
+    expect(Util.toScroll(true, true).isScrolling()).to.equal true
+    expect(Util.toScroll(false, true).isScrolling()).to.equal true
+    expect(Util.toScroll(true, false).isScrolling()).to.equal true
+
+
+  it '[toScroll] is not scrolling', ->
+    expect(Util.toScroll(false).isScrolling()).to.equal false
+    expect(Util.toScroll(false, false).isScrolling()).to.equal false
+
+
+
+
 

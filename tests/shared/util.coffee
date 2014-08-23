@@ -9,6 +9,8 @@ describe 'Util.isObject (true)', ->
     expect(Util.isObject(foo)).to.equal true
 
 
+# ----------------------------------------------------------------------
+
 
 describe 'Util.isObject (false)', ->
   it 'when string', ->
@@ -30,6 +32,7 @@ describe 'Util.isObject (false)', ->
     expect(Util.isObject(null)).to.equal false
 
 
+# ----------------------------------------------------------------------
 
 
 describe 'Util.isBlank', ->
@@ -64,6 +67,9 @@ describe 'Util.isBlank', ->
     expect(Util.isBlank(-> )).to.equal false
 
 
+# ----------------------------------------------------------------------
+
+
 describe 'Util.params', ->
   it 'has no params', ->
     expect(Util.params(-> )).to.eql []
@@ -81,6 +87,8 @@ describe 'Util.params', ->
     expect(Util.params({})).to.eql []
 
 
+# ----------------------------------------------------------------------
+
 
 describe 'Util.hash', ->
   it 'returns 0 when string is empty', ->
@@ -95,6 +103,8 @@ describe 'Util.hash', ->
     result2 = Util.hash('foo')
     expect(result1).to.equal result2
 
+
+# ----------------------------------------------------------------------
 
 
 describe 'Util.asValue', ->
@@ -118,4 +128,87 @@ describe 'Util.asValue', ->
     expect(Util.asValue(-> fn)()).to.equal 123
 
 
+# ----------------------------------------------------------------------
+
+
+describe 'Util.clone', ->
+  it 'doees not clone nothing', ->
+    expect(Util.clone()).to.equal undefined
+    expect(Util.clone(null)).to.equal null
+
+  it 'does not clone a string', ->
+    expect(Util.clone('foo')).to.equal 'foo'
+
+  it 'clones an Array', ->
+    array = [1,2,3]
+    cloned = Util.clone(array)
+    expect(cloned).to.not.equal array
+    expect(cloned).to.eql array
+
+  it 'clones an Date', ->
+    date = new Date()
+    cloned = Util.clone(date)
+    expect(cloned).to.not.equal date
+    expect(cloned).to.eql date
+
+  it 'deep clones an object', ->
+    obj =
+      array: [1,2,3]
+      date: new Date()
+      childObj: {}
+    cloned = Util.clone(obj)
+
+    expect(cloned.array).to.not.equal obj.array
+    expect(cloned.array).to.eql obj.array
+
+    expect(cloned.date).to.not.equal obj.date
+    expect(cloned.date).to.eql obj.date
+
+    expect(cloned.childObj).to.not.equal obj.childObj
+    expect(cloned.childObj).to.eql obj.childObj
+
+
+# ----------------------------------------------------------------------
+
+
+describe 'Util.toId', ->
+  it 'extracts the [.id]', ->
+    expect(Util.toId({ id:1 })).to.equal 1
+    expect(Util.toId({ id:2, _id:456 })).to.equal 2
+
+  it 'extracts the [._id]', ->
+    expect(Util.toId({ _id:1 })).to.equal 1
+
+  it 'extracts [.id] from derived class', ->
+    class Foo
+      id: 1
+    expect(Util.toId(new Foo())).to.equal 1
+
+  it 'extracts [._id] from derived class', ->
+    class Foo
+      _id: 1
+    expect(Util.toId(new Foo())).to.equal 1
+
+  it 'extracts [.id] from derived class via function', ->
+    class Foo
+      id: -> 1
+    expect(Util.toId(new Foo())).to.equal 1
+
+  it 'extracts [._id] from derived class via function', ->
+    class Foo
+      _id: -> 1
+    expect(Util.toId(new Foo())).to.equal 1
+
+
+
+  it 'returns original value (primitive)', ->
+    expect(Util.toId(1)).to.equal 1
+    expect(Util.toId('a')).to.equal 'a'
+
+  it 'returns primitive from function', ->
+    expect(Util.toId(-> 1)).to.equal 1
+
+  it 'returns object from function', ->
+    expect(Util.toId(-> { id:1 })).to.equal 1
+    expect(Util.toId(-> { _id:1 })).to.equal 1
 
