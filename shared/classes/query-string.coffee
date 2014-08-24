@@ -4,6 +4,7 @@ Converts a query-string into a hash.
 class QueryString
   constructor: (queryString) ->
     if Object.isString(queryString) and not queryString.isBlank()
+      queryString = queryString.remove(/^\?=/)
       for item in queryString.split('&')
         parts = item.split('=')
         @[parts[0]] = parts[1]
