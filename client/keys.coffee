@@ -91,8 +91,10 @@ ns.toArgs = (e) ->
     isMeta: -> ns.isMeta(keyCode)
     isModifier: -> ns.isModifier(keyCode)
     hasModifier: -> not @isModifier() and (@meta or @ctrl or @alt or @shift)
+    isContentKey: -> ns.isContentKey(e)
+    preventDefault: -> e.preventDefault()
     handled: ->
-      e.preventDefault()
+      args.preventDefault()
       args.isHandled = true
 
 

@@ -1,3 +1,7 @@
+EDGES = ['left', 'top', 'right', 'bottom']
+VENDOR_PREFIXES = ['-webkit-', '-moz-', '-o-', '-ms-', '']
+
+
 Meteor.startup ->
   # Expose as jQuery extension.
   $.fn.style = -> new Style(this)
