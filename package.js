@@ -9,7 +9,7 @@ Npm.depends({
 
 
 Package.on_use(function (api) {
-  api.use(['coffeescript', 'sugar']);
+  api.use(['coffeescript']);
   api.export('Util');
   api.export('ReactiveHash');
   api.export('ReactiveArray');
@@ -38,6 +38,7 @@ Package.on_use(function (api) {
   api.add_files('shared/classes/url.coffee', ['client', 'server']);
   api.add_files('shared/const/const.coffee', ['client', 'server']);
   api.add_files('shared/const/const-keys.coffee', ['client', 'server']);
+  api.add_files('shared/libs/sugar.js', ['client', 'server']);
   api.add_files('shared/client-settings.shared.coffee', ['client', 'server']);
   api.add_files('shared/compound-values.coffee', ['client', 'server']);
   api.add_files('shared/const.coffee', ['client', 'server']);
