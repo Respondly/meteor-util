@@ -49,6 +49,25 @@ Util.isBlank = (value) ->
 
 
 
+###
+Determines whether the given value is a number, or can be
+parsed into a number.
+
+NOTE: Examines string values to see if they are numeric.
+
+@param value: The value to examine.
+@returns true if the value is a number.
+###
+Util.isNumeric = (value) ->
+  return false if Util.isBlank(value)
+  number = value.toNumber?()
+  return false if number is undefined
+  return false if number.toString().length isnt value.toString().length
+  return not Object.isNaN(number)
+
+
+
+
 
 ###
 Determines the parameter names of a function

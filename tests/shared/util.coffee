@@ -70,6 +70,34 @@ describe 'Util.isBlank', ->
 # ----------------------------------------------------------------------
 
 
+describe 'Util.isNumeric', ->
+  it 'is numeric (number)', ->
+    expect(Util.isNumeric(0)).to.equal true
+    expect(Util.isNumeric(1)).to.equal true
+    expect(Util.isNumeric(-1)).to.equal true
+    expect(Util.isNumeric(0.5)).to.equal true
+    expect(Util.isNumeric(123456.123456)).to.equal true
+
+  it 'is numeric (string)', ->
+    expect(Util.isNumeric('0')).to.equal true
+    expect(Util.isNumeric('1')).to.equal true
+    expect(Util.isNumeric('-1')).to.equal true
+    expect(Util.isNumeric('0.5')).to.equal true
+    expect(Util.isNumeric('123456.123456')).to.equal true
+
+  it 'is not numeric', ->
+    expect(Util.isNumeric()).to.equal false
+    expect(Util.isNumeric(null)).to.equal false
+    expect(Util.isNumeric(undefined)).to.equal false
+    expect(Util.isNumeric('string')).to.equal false
+    expect(Util.isNumeric('123px')).to.equal false
+    expect(Util.isNumeric({})).to.equal false
+    expect(Util.isNumeric(new Date())).to.equal false
+
+
+# ----------------------------------------------------------------------
+
+
 describe 'Util.params', ->
   it 'has no params', ->
     expect(Util.params(-> )).to.eql []
