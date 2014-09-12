@@ -25,6 +25,7 @@ Package.on_use(function (api) {
   api.export('PageJS');
   api.export('QueryString');
   api.export('Url');
+  api.export('Server');
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('shared/util.coffee', ['client', 'server']);
@@ -49,6 +50,8 @@ Package.on_use(function (api) {
   api.add_files('server/client-settings.server.coffee', 'server');
   api.add_files('server/db.coffee', 'server');
   api.add_files('server/npm.coffee', 'server');
+  api.add_files('server/server.coffee', 'server');
+  api.add_files('server/util.coffee', 'server');
   api.add_files('client/dom/css.coffee', 'client');
   api.add_files('client/classes/controller-base.coffee', 'client');
   api.add_files('client/classes/keyboard-controller.coffee', 'client');
