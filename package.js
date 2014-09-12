@@ -31,6 +31,7 @@ Package.on_use(function (api) {
   api.add_files('shared/util.coffee', ['client', 'server']);
   api.add_files('shared/ns.coffee', ['client', 'server']);
   api.add_files('shared/classes/auto-run.coffee', ['client', 'server']);
+  api.add_files('shared/classes/elapsed.coffee', ['client', 'server']);
   api.add_files('shared/classes/handlers.coffee', ['client', 'server']);
   api.add_files('shared/classes/page-js.js', ['client', 'server']);
   api.add_files('shared/classes/query-string.coffee', ['client', 'server']);
