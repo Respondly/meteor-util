@@ -184,11 +184,86 @@ describe 'ReactiveHash.prop', ->
     expect(fn()).to.equal undefined
 
 
+  it 'invokes callback multiple times with same value', (done) ->
+    fn = (value) -> hash.prop 'foo', value, default:'hello', onlyOnChange:false
+    count = 0
+    Deps.autorun =>
+        count += 1
+        fn()
+    count = 0
+    fn(123)
+    Util.delay ->
+      fn(123)
+      done()
+
+  it 'invokes callback one time with same value', (done) ->
+    fn = (value) -> hash.prop 'foo', value, default:'hello', onlyOnChange:true
+    count = 0
+    Deps.autorun =>
+        count += 1
+        fn()
+    count = 0
+    fn(123)
+    Util.delay ->
+      fn(123)
+      done()
+
+
+
+describe 'ReactiveHash.prop - onlyOnChange', ->
+  hash = null
+  beforeEach -> hash = new ReactiveHash()
+
+  it 'invokes callback multiple times with same value', (done) ->
+    fn = (value) -> hash.prop 'foo', value, onlyOnChange:false # Default.
+    count = 0
+    Deps.autorun =>
+        count += 1
+        fn()
+    count = 0
+    fn(123)
+    Util.delay =>
+        fn(123)
+        Util.delay =>
+          @try -> expect(count).to.equal 2
+          done()
+
+
+  it 'invokes callback one time with same value', (done) ->
+    fn = (value) -> hash.prop 'foo', value, onlyOnChange:true
+    count = 0
+    Deps.autorun =>
+        count += 1
+        fn()
+    count = 0
+    fn(123)
+    Util.delay =>
+      fn(123)
+      Util.delay =>
+        @try -> expect(count).to.equal 1
+        done()
+
+
+  it 'invokes callback one time with same value (array)', (done) ->
+    fn = (value) -> hash.prop 'foo', value, onlyOnChange:true
+    count = 0
+    Deps.autorun =>
+        count += 1
+        fn()
+    count = 0
+    fn([1,2,3])
+    Util.delay =>
+      fn([1,2,3])
+      Util.delay =>
+        @try -> expect(count).to.equal 1
+        done()
+
+
+
 
 describe 'ReactiveHash.prop (reactivity)', ->
   hash = null
   beforeEach -> hash = new ReactiveHash()
-
 
   it 'call dependencies on each change', (done) ->
     fn = (value) -> hash.prop 'foo', value

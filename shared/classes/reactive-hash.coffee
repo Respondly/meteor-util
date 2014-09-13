@@ -26,6 +26,7 @@ class ReactiveHash
     @deps(key).depend()
     @keys[key]
 
+
   ###
   Sets the given value
   @param key:   The unique identifier of the value (this is prefixed with the namespace).
@@ -39,7 +40,7 @@ class ReactiveHash
 
     # Don't set if the value hasn't changed (and this check is specified)
     onlyOnChange = if options.onlyOnChange? then options.onlyOnChange else @onlyOnChange
-    if onlyOnChange and value is @keys[key]
+    if onlyOnChange and Object.equal(value, @keys[key])
       return value
 
     if value is undefined then delete @keys[key] else @keys[key] = value
