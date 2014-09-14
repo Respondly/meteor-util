@@ -22,3 +22,14 @@ Server.addresses = ->
         addresses.push(address.address)
   addresses
 
+
+###
+Gets whether the app is running on a "development" machine.
+To declare a machin as "dev" use the environment variable:
+
+    export DEV_SERVER=true
+
+###
+Server.isDev = ->
+  Util.isTrue(process.env.DEV_SERVER, default:false)
+
