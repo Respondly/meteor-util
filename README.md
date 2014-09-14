@@ -1,4 +1,4 @@
-# Meteor-Util
+# Util
 Common utility helpers.
 
 **Note:** Everything here could conceivabely be broken out into seperate
@@ -7,14 +7,14 @@ be given it's own package.
 
 
 
-# Run Tests
+## Run Tests
 From the package folder:
 
     mrt test-packages util
 
 
 
-# License (MIT)
+## License (MIT)
 
 Copyright © 2014, **Respondly**
 
