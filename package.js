@@ -98,6 +98,7 @@ Package.on_test(function (api) {
   api.add_files('tests/shared/timer.coffee', ['client', 'server']);
   api.add_files('tests/shared/util.coffee', ['client', 'server']);
   api.add_files('tests/server/client-settings.coffee', 'server');
+  api.add_files('tests/server/server.coffee', 'server');
   api.add_files('tests/client/controller-base.coffee', 'client');
   api.add_files('tests/client/local-storage-test.coffee', 'client');
   api.add_files('tests/client/scoped-session-test.coffee', 'client');

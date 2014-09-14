@@ -1,3 +1,17 @@
+os = Npm.require('os')
+
+describe 'Server', ->
+  it 'has a hostname', ->
+    expect(Server.hostname()).to.equal os.hostname()
+
+
+  it 'has server IP addresses', ->
+    expect(Server.addresses().length).to.be.at.least 1
+
+
+# ----------------------------------------------------------------------
+
+
 describe 'Server.isDev', ->
   ORIGINAL_VALUE = null
 
