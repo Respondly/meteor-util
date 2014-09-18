@@ -9,14 +9,61 @@ Meteor.startup ->
   Util.keyboard = new Keyboard()
 
 
-
 hash = new ReactiveHash()
 
-class Keyboard # extends KeyboardController
+
+###
+Global keyboard event bus.
+###
+class Keyboard
   constructor: ->
-    $(document).keydown  (e) => @onKeyDown(Util.keys.toArgs(e))
-    $(document).keyup    (e) => @onKeyUp(Util.keys.toArgs(e))
+    keyDownHandlers = new Handlers()
+    keyUpHandlers = new Handlers()
+
+    @__internal__ =
+      keyDownHandlers: keyDownHandlers
+      keyUpHandlers: keyUpHandlers
+
+    handleKeyDown = (e) =>
+        current = @current() ? {}
+        modifiers = @modifiers() ? {}
+        if e
+          # Store the current key.
+          current[e.which] = e
+          @current(current)
+
+          # Store as a modifier (if it is one).
+          if modifierKey = toModifierKey(e)
+            modifiers[modifierKey] = e
+            @modifiers(modifiers)
+
+          # Invoke handlers.
+          keyDownHandlers.invoke(e)
+
+
+
+    handleKeyUp = (e) =>
+        if e.isMeta()
+          @reset()
+        else
+          # Reset the key.
+          if current = @current()
+            delete current[e.which]
+            @current(current)
+
+          # Reset the modifier (if it is one).
+          if modifierKey = toModifierKey(e)
+            modifiers = @modifiers()
+            delete modifiers[modifierKey]
+            @modifiers(modifiers)
+
+          # Invoke handlers.
+          keyUpHandlers.invoke(e)
+
+    $(document).keydown  (e) => handleKeyDown(Util.keys.toArgs(e))
+    $(document).keyup    (e) => handleKeyUp(Util.keys.toArgs(e))
     $(window).on 'blur', (e) => @reset()
+
 
 
   ###
@@ -27,10 +74,12 @@ class Keyboard # extends KeyboardController
     @modifiers({})
 
 
+
   ###
   REACTIVE: An object containing the currently pressed keys.
   ###
   current: (value) -> hash.prop 'current', value, default:{}
+
 
 
   ###
@@ -46,41 +95,24 @@ class Keyboard # extends KeyboardController
   isModifierPressed: -> not Object.isEmpty(@modifiers())
 
 
-  # OVERRIDES ----------------------------------------------------------------------
 
-
-  onKeyDown: (e) ->
-    current = @current() ? {}
-    modifiers = @modifiers() ? {}
-    if e
-      # Store the current key.
-      current[e.which] = e
-      @current(current)
-
-      # Store as a modifier (if it is one).
-      if modifierKey = toModifierKey(e)
-        modifiers[modifierKey] = e
-        @modifiers(modifiers)
+  ###
+  Registers a handler to invoke when a key is pressed.
+  @param func(e): The function to invoke with the event args.
+  @returns the handle. Use the [stop] method to release.
+  ###
+  onKeyDown: (func) -> @__internal__.keyDownHandlers.push(func)
 
 
 
+  ###
+  Registers a handler to invoke when a key is released.
+  @param func(e): The function to invoke with the event args.
+  @returns the handle. Use the [stop] method to release.
+  ###
+  onKeyUp: (func) -> @__internal__.keyUpHandlers.push(func)
 
 
-  onKeyUp: (e) ->
-    if e.isMeta()
-      @reset()
-    else
-      # Reset the key.
-      if current = @current()
-        delete current[e.which]
-        @current(current)
-
-      # Reset the modifier (if it is one).
-      if modifierKey = toModifierKey(e)
-        modifiers = @modifiers()
-        delete modifiers[modifierKey]
-        # modifiers[modifierKey] = e
-        @modifiers(modifiers)
 
 
 # PRIVATE ----------------------------------------------------------------------
