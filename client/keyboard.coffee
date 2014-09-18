@@ -18,7 +18,7 @@ Global keyboard event bus.
 class Keyboard
   constructor: ->
     keyDownHandlers = new Handlers()
-    keyUpHandlers = new Handlers()
+    keyUpHandlers   = new Handlers()
 
     @__internal__ =
       keyDownHandlers: keyDownHandlers
@@ -101,7 +101,7 @@ class Keyboard
   @param func(e): The function to invoke with the event args.
   @returns the handle. Use the [stop] method to release.
   ###
-  onKeyDown: (func) -> @__internal__.keyDownHandlers.push(func)
+  keyDown: (func) -> @__internal__.keyDownHandlers.push(func)
 
 
 
@@ -110,7 +110,7 @@ class Keyboard
   @param func(e): The function to invoke with the event args.
   @returns the handle. Use the [stop] method to release.
   ###
-  onKeyUp: (func) -> @__internal__.keyUpHandlers.push(func)
+  keyUp: (func) -> @__internal__.keyUpHandlers.push(func)
 
 
 
