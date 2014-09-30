@@ -68,6 +68,22 @@ Util.isNumeric = (value) ->
 
 
 
+###
+Gets whether the app is running on a dev machine.
+
+###
+Util.isDev = ->
+  if Meteor.isServer
+    (process.env.NODE_ENV ? 'development') is 'development'
+
+  else
+    hostname = window?.location?.hostname.trim()
+    if hostname
+      return true if hostname.has(/localhost/g)
+    false
+
+
+
 
 ###
 Determines the parameter names of a function
