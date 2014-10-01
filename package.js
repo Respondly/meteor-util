@@ -26,6 +26,7 @@ Package.on_use(function (api) {
   api.export('QueryString');
   api.export('Url');
   api.export('Server');
+  api.export('Fonts');
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('shared/util.coffee', ['client', 'server']);
@@ -53,6 +54,7 @@ Package.on_use(function (api) {
   api.add_files('shared/user-agent.coffee', ['client', 'server']);
   api.add_files('server/client-settings.server.coffee', 'server');
   api.add_files('server/db.coffee', 'server');
+  api.add_files('server/fonts.coffee', 'server');
   api.add_files('server/npm.coffee', 'server');
   api.add_files('server/server.coffee', 'server');
   api.add_files('server/util.coffee', 'server');
@@ -71,6 +73,7 @@ Package.on_use(function (api) {
   api.add_files('client/db.coffee', 'client');
   api.add_files('client/draggable.coffee', 'client');
   api.add_files('client/events.coffee', 'client');
+  api.add_files('client/fonts.coffee', 'client');
   api.add_files('client/keyboard-controller.coffee', 'client');
   api.add_files('client/keyboard.coffee', 'client');
   api.add_files('client/keys.coffee', 'client');
