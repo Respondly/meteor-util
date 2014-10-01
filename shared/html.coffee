@@ -1,11 +1,11 @@
-html = Util.html = {}
+ns = Util.html = {}
 
 
 ###
 Performs basic HTML formatting for text.
 ###
-html.format = (text) ->
-  html = html.formatLines(text)
+ns.format = (text) ->
+  html = ns.formatLines(text)
   html
 
 
@@ -20,7 +20,7 @@ Processes double line-breaks (\n) in a string into <p>'s.
 
 @param text: The HTML text to format.
 ###
-html.formatLines = (text) ->
+ns.formatLines = (text) ->
   return text unless text
   text = text.trim()
   html = ''
@@ -40,7 +40,7 @@ Formats brackets:
   << to: &lt;
   >> to: &gt;
 ###
-html.escapeBrackets = (text) ->
+ns.escapeBrackets = (text) ->
   if text
     text = text.replace(/<</g, '&lt;').replace(/>>/g, '&gt;')
   text
