@@ -48,6 +48,7 @@ Package.on_use(function (api) {
   api.add_files('shared/conversion.coffee', ['client', 'server']);
   api.add_files('shared/date.coffee', ['client', 'server']);
   api.add_files('shared/email.coffee', ['client', 'server']);
+  api.add_files('shared/html.coffee', ['client', 'server']);
   api.add_files('shared/position.coffee', ['client', 'server']);
   api.add_files('shared/string.coffee', ['client', 'server']);
   api.add_files('shared/timer.coffee', ['client', 'server']);
@@ -95,6 +96,7 @@ Package.on_test(function (api) {
   api.add_files('tests/shared/date.coffee', ['client', 'server']);
   api.add_files('tests/shared/email.coffee', ['client', 'server']);
   api.add_files('tests/shared/handlers.coffee', ['client', 'server']);
+  api.add_files('tests/shared/html.coffee', ['client', 'server']);
   api.add_files('tests/shared/ns.coffee', ['client', 'server']);
   api.add_files('tests/shared/position.coffee', ['client', 'server']);
   api.add_files('tests/shared/reactive-array.coffee', ['client', 'server']);
