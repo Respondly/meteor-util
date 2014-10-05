@@ -19,7 +19,7 @@ NOTES:
 
 @APP = APP = {}
 cache = {}
-hash = new ReactiveHash()
+APP.hash = hash = new ReactiveHash()
 
 
 # ----------------------------------------------------------------------
