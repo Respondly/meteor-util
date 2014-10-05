@@ -31,13 +31,14 @@ Package.on_use(function (api) {
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('shared/util.coffee', ['client', 'server']);
   api.add_files('shared/ns.coffee', ['client', 'server']);
+  api.add_files('shared/classes/reactive-hash.coffee', ['client', 'server']);
+  api.add_files('shared/app.coffee', ['client', 'server']);
   api.add_files('shared/classes/auto-run.coffee', ['client', 'server']);
   api.add_files('shared/classes/elapsed.coffee', ['client', 'server']);
   api.add_files('shared/classes/handlers.coffee', ['client', 'server']);
   api.add_files('shared/classes/page-js.js', ['client', 'server']);
   api.add_files('shared/classes/query-string.coffee', ['client', 'server']);
   api.add_files('shared/classes/reactive-array.coffee', ['client', 'server']);
-  api.add_files('shared/classes/reactive-hash.coffee', ['client', 'server']);
   api.add_files('shared/classes/url.coffee', ['client', 'server']);
   api.add_files('shared/const/const.coffee', ['client', 'server']);
   api.add_files('shared/const/const-keys.coffee', ['client', 'server']);
