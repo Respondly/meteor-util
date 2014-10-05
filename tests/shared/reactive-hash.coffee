@@ -1,3 +1,15 @@
+describe 'ReactiveHash: constructor', ->
+
+  it '[onlyOnChange] is false by deault', ->
+    expect(new ReactiveHash().onlyOnChange).to.equal false
+
+  it 'sets [onlyOnChange] to true as constructor option', ->
+    hash = new ReactiveHash(onlyOnChange:true)
+    expect(hash.onlyOnChange).to.equal true
+
+
+
+
 describe 'ReactiveHash: get/set', ->
   hash = null
   beforeEach -> hash = new ReactiveHash()

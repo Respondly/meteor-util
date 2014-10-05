@@ -3,9 +3,15 @@ A hash/dictionary that is reactive, but does not persist
 values across hot-code-pushes.
 ###
 class ReactiveHash
-  constructor: ->
+  ###
+  Constructor.
+  @param options:
+            - onlyOnChange: The default [onlyOnChange] value.
+  ###
+  constructor: (options = {}) ->
     @keys = {}
     @_deps = {}
+    @onlyOnChange = options.onlyOnChange ? false
 
 
   ###
@@ -15,6 +21,13 @@ class ReactiveHash
     @isDisposed = true
     @keys = {}
     @_deps = {}
+
+
+  ###
+  Default setting for the 'onlyOnChange' option passed to the [prop] method.
+  ###
+  onlyOnChange: false
+
 
 
   ###
@@ -69,12 +82,6 @@ class ReactiveHash
   deps: (key) ->
     @_deps[key] = new Deps.Dependency() unless @_deps[key]
     @_deps[key]
-
-
-  ###
-  Default setting for the 'onlyOnChange' option passed to the [prop] method.
-  ###
-  onlyOnChange: false
 
 
 
