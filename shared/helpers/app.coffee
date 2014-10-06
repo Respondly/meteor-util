@@ -1,5 +1,5 @@
 #= base
-#= require ./classes/reactive-hash
+#= require ../classes/reactive-hash
 
 ###
 The global [APP] is reserved for use by a consuming Meteor application.

@@ -27,12 +27,13 @@ Package.on_use(function (api) {
   api.export('Url');
   api.export('Server');
   api.export('Fonts');
+  api.export('Service');
 
   // Generated with: github.com/philcockfield/meteor-package-paths
-  api.add_files('shared/util.coffee', ['client', 'server']);
-  api.add_files('shared/ns.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/util.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/ns.coffee', ['client', 'server']);
   api.add_files('shared/classes/reactive-hash.coffee', ['client', 'server']);
-  api.add_files('shared/app.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/app.coffee', ['client', 'server']);
   api.add_files('shared/classes/auto-run.coffee', ['client', 'server']);
   api.add_files('shared/classes/elapsed.coffee', ['client', 'server']);
   api.add_files('shared/classes/handlers.coffee', ['client', 'server']);
@@ -42,18 +43,18 @@ Package.on_use(function (api) {
   api.add_files('shared/classes/url.coffee', ['client', 'server']);
   api.add_files('shared/const/const.coffee', ['client', 'server']);
   api.add_files('shared/const/const-keys.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/client-settings.shared.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/compound-values.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/conversion.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/date.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/email.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/html.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/position.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/string.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/timer.coffee', ['client', 'server']);
+  api.add_files('shared/helpers/user-agent.coffee', ['client', 'server']);
   api.add_files('shared/libs/sugar.js', ['client', 'server']);
-  api.add_files('shared/client-settings.shared.coffee', ['client', 'server']);
-  api.add_files('shared/compound-values.coffee', ['client', 'server']);
-  api.add_files('shared/const.coffee', ['client', 'server']);
-  api.add_files('shared/conversion.coffee', ['client', 'server']);
-  api.add_files('shared/date.coffee', ['client', 'server']);
-  api.add_files('shared/email.coffee', ['client', 'server']);
-  api.add_files('shared/html.coffee', ['client', 'server']);
-  api.add_files('shared/position.coffee', ['client', 'server']);
-  api.add_files('shared/string.coffee', ['client', 'server']);
-  api.add_files('shared/timer.coffee', ['client', 'server']);
-  api.add_files('shared/user-agent.coffee', ['client', 'server']);
+  api.add_files('shared/ns.js', ['client', 'server']);
   api.add_files('server/client-settings.server.coffee', 'server');
   api.add_files('server/db.coffee', 'server');
   api.add_files('server/fonts.coffee', 'server');
