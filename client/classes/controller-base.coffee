@@ -7,7 +7,7 @@ Base class for UI controllers.
 class ControllerBase extends AutoRun
   constructor: ->
     super
-    @hash = new ReactiveHash()
+    @hash = new ReactiveHash(onlyOnChange:true)
     Util.Events.extend(@)
 
 
@@ -20,6 +20,12 @@ class ControllerBase extends AutoRun
     @hash?.dispose()
     @off()
 
+
+
+  ###
+  REACTIVE: Hash property.
+  ###
+  prop: (key, value, options) -> @hash.prop(key, value, options)
 
 
   ###
