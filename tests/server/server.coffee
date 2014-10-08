@@ -39,3 +39,14 @@ describe 'Server.isDev', ->
 
 
 
+# ----------------------------------------------------------------------
+
+
+
+describe 'Server.sleep', ->
+  it 'sleeps for 50ms', ->
+    startedAt = new Date()
+    expect(startedAt.millisecondsAgo()).to.be.below 50
+    Server.sleep(50)
+    expect(startedAt.millisecondsAgo()).to.be.above 50
+
