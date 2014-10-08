@@ -16,6 +16,29 @@ Util.asValue = (value, defaultValue) ->
 
 
 
+###
+Examines a value, if it's a function, executes it, returning the first value that is found.
+
+@param value:         The value to operate on.
+                      If multiple values are passed, the first value that is not [undefined] is returned.
+                      NB: This is helpful when attempting to get the first value from a number
+                          of different possible sources the value could have been declarted,
+                          eg. [data] or [options] on a visual control.
+
+@param defaultValue: Optional.  Value to return if a value is not specified or derived from the function.
+###
+Util.firstValue = (values, defaultValue) ->
+  values = [values] unless Object.isArray(values)
+  for value in values
+    if value isnt undefined
+      value = Util.asValue(value, defaultValue)
+      return value if value isnt undefined
+
+  # No-value.
+  defaultValue
+
+
+
 
 ###
 Determines whether the given value an object (literal or derived).
