@@ -35,17 +35,17 @@ Events.extend = (obj) ->
 
 
 
-# ###
-# Determines whether the given click event args was
-# from the Left mouse button.
-# @param e: The arguments from the click event.
-# ###
-# util.isLeftClick = (e) -> e.which is 1
+###
+Determines whether the given click event args was
+from the Left mouse button.
+@param e: The arguments from the click event.
+###
+Util.isLeftClick = (e) -> e.which is 1
 
-# ###
-# Determines whether the given click event args was
-# from the Right mouse button.
-# @param e: The arguments from the click event.
-# ###
-# util.isRightClick = (e) -> e.which is 3
+###
+Determines whether the given click event args was
+from the Right mouse button.
+@param e: The arguments from the click event.
+###
+Util.isRightClick = (e) -> e.which is 3
 
