@@ -101,7 +101,7 @@ class Url
 
   @returns true if the URL was loaded, of false if the non-forced load operation decided the URL should not be loaded.
   ###
-  show: (options) -> APP?.route?.show(@fullPath, options)
+  show: (options) -> Router?.show(@fullPath, options)
 
 
 
@@ -123,7 +123,7 @@ class Url
 
   @returns true if the URL was loaded, of false if the non-forced load operation decided the URL should not be loaded.
   ###
-  replace: (options) -> APP?.route?.replace(@fullPath, options)
+  replace: (options) -> Router?.replace(@fullPath, options)
 
 
 
