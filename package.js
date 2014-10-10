@@ -60,10 +60,12 @@ Package.on_use(function (api) {
   api.add_files('server/fonts.coffee', 'server');
   api.add_files('server/npm.coffee', 'server');
   api.add_files('server/server.coffee', 'server');
+  api.add_files('server/server.publish.coffee', 'server');
   api.add_files('client/dom/css.coffee', 'client');
   api.add_files('client/classes/controller-base.coffee', 'client');
   api.add_files('client/classes/keyboard-controller.coffee', 'client');
   api.add_files('client/classes/scoped-session.coffee', 'client');
+  api.add_files('client/classes/subscriptions.coffee', 'client');
   api.add_files('client/classes/user-agent.coffee', 'client');
   api.add_files('client/dom/browser.coffee', 'client');
   api.add_files('client/dom/height-animator.coffee', 'client');
