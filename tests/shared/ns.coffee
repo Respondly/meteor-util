@@ -1,15 +1,31 @@
-describe 'Util.ns: getOrCreate', ->
-  it 'creates a new object', ->
+describe 'Util.ns.get', ->
+  afterEach -> delete (global ? window).__TEST
+
+
+  it 'creates a new object (on specified root object)', ->
     root = {}
     foo = Util.ns.get(root, 'path.foo')
     expect(foo).to.be.an 'object'
     expect(root.path.foo).to.exist
 
-  it 'creates a new object from namespace as array', ->
+  it 'creates a new object (on inferred global root)', ->
+    foo = Util.ns.get('__TEST.path.foo')
+    expect(foo).to.be.an 'object'
+    expect((global ? window).__TEST.path.foo).to.exist
+
+
+  it 'creates a new object from namespace as array (on specified root object)', ->
     root = {}
     foo = Util.ns.get(root, ['path', 'foo'])
     expect(foo).to.be.an 'object'
     expect(root.path.foo).to.exist
+
+
+  it 'creates a new object from namespace as array (on inferred global root)', ->
+    foo = Util.ns.get(['__TEST', 'path', 'foo'])
+    expect(foo).to.be.an 'object'
+    expect((global ? window).__TEST.path.foo).to.exist
+
 
   it 'retrieves the same object', ->
     root = {}
@@ -42,17 +58,22 @@ describe 'Util.ns: getOrCreate', ->
 
 
 describe 'Util.ns', ->
-  ###
-  NOTE: Root would typically be something like APP or AppName.
-  ###
-  ROOT = null
-  beforeEach -> ROOT = {}
+  afterEach ->
+
+  it 'stores the root namespace on the global object', ->
+    Util.ns '__TEST__NS_CACHE.foo'
+    expect((global ? window).__TEST__NS_CACHE).to.exist
+    expect((global ? window).__TEST__NS_CACHE.foo).to.exist
+    delete (global ? window).__TEST__NS_CACHE
+
 
   it 'creates a single cached namespace', ->
-    ns1 = Util.ns ROOT, 'test'
-    ns2 = Util.ns ROOT, 'test'
+    ns1 = Util.ns '__TEST.test'
+    ns2 = Util.ns '__TEST.test'
     ns1.foo = 123
     expect(ns2.foo).to.equal 123
+
+    delete (global ? window).__TEST
 
 
 # ----------------------------------------------------------------------

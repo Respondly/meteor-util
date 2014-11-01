@@ -8,20 +8,24 @@ Safely creates the given namespace on the root object
 and caches the value for quicker response times
 on subsequent calls.
 
-@param root:      The root object
+@param root:      (optional) The root object
 @param namespace: The dot-delimited NS string (excluding the root object).
 
 @returns the child object of the namespace.
 ###
-Util.ns = (root, namespace) ->
-  throw new Error('A namespace root must be specified') unless Object.isObject(root)
+Util.ns = (namespace) ->
+
+
+  # throw new Error('A namespace root must be specified') unless Object.isObject(root)
+
+
 
   # Check whether the NS has already been created.
   cached = cache[namespace]
   return cached if cached?
 
   # Build the namespace.
-  result = Util.ns.get(root, namespace)
+  result = Util.ns.get(namespace)
 
   # Finish up.
   cache[namespace] = result
@@ -33,14 +37,18 @@ Util.ns = (root, namespace) ->
 ###
 Safely creates the given namespace on the root object.
 
-@param root:      The root object
+@param root:      (Optional) The root object.
 @param namespace: The dot-delimited NS string (excluding the root object).
 
 @returns the child object of the namespace.
 ###
 Util.ns.get = (root, namespace) ->
-  return unless root? and namespace?
+  if Object.isString(root) or Object.isArray(root)
+    namespace = root
+    root = null
+
   return if Util.isBlank(namespace)
+  root ?= (global ? window)
 
   getOrCreate = (parent, name) ->
       parent[name] ?= {}
