@@ -30,18 +30,11 @@ Safely creates the given namespace on the root APP object.
 @param namespace: The dot-delimited NS string (excluding the root 'APP').
 @returns the child object of the namespace.
 ###
-APP.ns = (namespace, root = APP) ->
+APP.ns = (namespace) -> Util.ns(formatNamespace(namespace))
+APP.ns.toValue = (namespace) -> Util.ns.toValue(formatNamespace(namespace))
+APP.ns.toFunction = (namespace) -> Util.ns.toFunction(formatNamespace(namespace))
 
-  # Check whether the NS has already been created.
-  cached = cache[namespace]
-  return cached if cached?
-
-  # Build the namespace.
-  result = Util.ns.get(root, namespace)
-
-  # Finish up.
-  cache[namespace] = result
-  result
+formatNamespace = (namespace) -> "APP.#{ namespace }"
 
 
 # ----------------------------------------------------------------------

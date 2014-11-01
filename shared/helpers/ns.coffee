@@ -14,12 +14,6 @@ on subsequent calls.
 @returns the child object of the namespace.
 ###
 Util.ns = (namespace) ->
-
-
-  # throw new Error('A namespace root must be specified') unless Object.isObject(root)
-
-
-
   # Check whether the NS has already been created.
   cached = cache[namespace]
   return cached if cached?
@@ -70,11 +64,11 @@ Util.ns.get = (root, namespace) ->
 
 ###
 Retrieves the value at the end of the given namespace string.
-@param ns: The namespace string.
+@param namespace: The namespace string.
 ###
-Util.ns.toValue = (ns) ->
-  return if Util.isBlank(ns)
-  parts = ns.split('.')
+Util.ns.toValue = (namespace) ->
+  return if Util.isBlank(namespace)
+  parts = namespace.split('.')
   return if parts.length is 0
 
   result = global ? window
@@ -89,10 +83,10 @@ Util.ns.toValue = (ns) ->
 
 
 ###
-Reads the ns path, retrieving the value as a function.
-@param ns: The namespace string.
+Reads the namespace path, retrieving the value as a function.
+@param namespace: The namespace string.
 ###
-Util.ns.toFunction = (ns) ->
-  result = Util.ns.toValue(ns)
+Util.ns.toFunction = (namespace) ->
+  result = Util.ns.toValue(namespace)
   result if Object.isFunction(result)
 
