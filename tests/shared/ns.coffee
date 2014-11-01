@@ -38,6 +38,8 @@ describe 'Util.ns: getOrCreate', ->
     expect(Util.ns.get(root, '  ')).not.to.exist
 
 
+# ----------------------------------------------------------------------
+
 
 describe 'Util.ns', ->
   ###
@@ -51,5 +53,71 @@ describe 'Util.ns', ->
     ns2 = Util.ns ROOT, 'test'
     ns1.foo = 123
     expect(ns2.foo).to.equal 123
+
+
+# ----------------------------------------------------------------------
+
+
+
+describe 'Util.ns.toValue', ->
+  __TEST = null
+  ns = null
+  beforeEach ->
+    (global ? window).__TEST = __TEST = {}
+    ns = Util.ns.get(__TEST, 'core.ns')
+
+  afterEach -> delete (global ? window).__TEST
+
+
+  it 'retrieves an object from the namespace', ->
+    obj = { foo:123 }
+    ns.obj = obj
+    result = Util.ns.toValue('__TEST.core.ns.obj')
+    expect(Util.ns.toValue('__TEST.core.ns.obj')).to.equal obj
+
+
+  it 'retrieves a number from the namespace', ->
+    ns.number = 123
+    expect(Util.ns.toValue('__TEST.core.ns.number')).to.equal 123
+
+
+  it 'does not retrieve an object from the namespace', ->
+    expect(Util.ns.toValue('')).to.equal undefined
+    expect(Util.ns.toValue('  ')).to.equal undefined
+    expect(Util.ns.toValue()).to.equal undefined
+    expect(Util.ns.toValue(null)).to.equal undefined
+    expect(Util.ns.toValue('__TEST.core.ns.doesNotExist')).to.equal undefined
+
+
+# ----------------------------------------------------------------------
+
+
+
+describe 'Util.ns.toFunction', ->
+  __TEST = null
+  ns = null
+  beforeEach ->
+    (global ? window).__TEST = __TEST = {}
+    ns = Util.ns.get(__TEST, 'core.ns')
+
+  afterEach -> delete (global ? window).__TEST
+
+
+  it 'retrieves a function', ->
+    fn = ->
+    ns.myFunc = fn
+    expect(Util.ns.toFunction('__TEST.core.ns.myFunc')).to.equal fn
+
+
+  it 'returns nothing if the value is not a function', ->
+    ns.myText = 'Hello'
+    expect(Util.ns.toFunction('__TEST.core.ns.myText')).to.equal undefined
+
+
+
+
+
+
+
 
 

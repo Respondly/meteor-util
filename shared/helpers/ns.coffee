@@ -3,9 +3,14 @@ cache = {}
 
 
 ###
-Safely creates the given namespace on the root object.
+
+Safely creates the given namespace on the root object
+and caches the value for quicker response times
+on subsequent calls.
+
 @param root:      The root object
 @param namespace: The dot-delimited NS string (excluding the root object).
+
 @returns the child object of the namespace.
 ###
 Util.ns = (root, namespace) ->
@@ -16,7 +21,7 @@ Util.ns = (root, namespace) ->
   return cached if cached?
 
   # Build the namespace.
-  result = Util.ns.get( root, namespace )
+  result = Util.ns.get(root, namespace)
 
   # Finish up.
   cache[namespace] = result
@@ -25,25 +30,61 @@ Util.ns = (root, namespace) ->
 
 
 
+###
+Safely creates the given namespace on the root object.
+
+@param root:      The root object
+@param namespace: The dot-delimited NS string (excluding the root object).
+
+@returns the child object of the namespace.
+###
 Util.ns.get = (root, namespace) ->
   return unless root? and namespace?
-
-  if Object.isString(namespace)
-    return if namespace.isBlank()
+  return if Util.isBlank(namespace)
 
   getOrCreate = (parent, name) ->
-    parent[name] ?= {}
-    parent[name]
+      parent[name] ?= {}
+      parent[name]
 
   add = (parent, parts) ->
-    part = getOrCreate parent, parts[0]
-    if parts.length > 1
-      parts.splice(0, 1)
-      part = add part, parts  # <= RECURSION.
-    part
+      part = getOrCreate parent, parts[0]
+      if parts.length > 1
+        parts.splice(0, 1)
+        part = add part, parts  # <= RECURSION.
+      part
 
   # Build the namespace.
   namespace = namespace.split('.') unless Object.isArray(namespace)
-  add(root, namespace)
+  result = add(root, namespace)
 
+
+
+
+###
+Retrieves the value at the end of the given namespace string.
+@param ns: The namespace string.
+###
+Util.ns.toValue = (ns) ->
+  return if Util.isBlank(ns)
+  parts = ns.split('.')
+  return if parts.length is 0
+
+  result = global ? window
+  for part, i in parts
+    result = result[part]
+    return unless result?
+
+  result
+
+
+
+
+
+###
+Reads the ns path, retrieving the value as a function.
+@param ns: The namespace string.
+###
+Util.ns.toFunction = (ns) ->
+  result = Util.ns.toValue(ns)
+  result if Object.isFunction(result)
 
