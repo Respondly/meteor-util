@@ -53,6 +53,7 @@ Package.on_use(function (api) {
   api.add_files('shared/helpers/string.coffee', ['client', 'server']);
   api.add_files('shared/helpers/timer.coffee', ['client', 'server']);
   api.add_files('shared/helpers/user-agent.coffee', ['client', 'server']);
+  api.add_files('shared/libs/stampit.js', ['client', 'server']);
   api.add_files('shared/libs/sugar.js', ['client', 'server']);
   api.add_files('shared/ns.js', ['client', 'server']);
   api.add_files('server/client-settings.server.coffee', 'server');
