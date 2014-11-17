@@ -147,5 +147,7 @@ createHandle = (handlers, func) ->
       handle.isStopped = true
       handlers.items.removeAt(handlers.items.indexOf(handle))
 
+    dispose: -> @stop()
+
 
 
