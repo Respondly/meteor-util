@@ -34,7 +34,9 @@ APP.ns = (namespace) -> Util.ns(formatNamespace(namespace))
 APP.ns.toValue = (namespace) -> Util.ns.toValue(formatNamespace(namespace))
 APP.ns.toFunction = (namespace) -> Util.ns.toFunction(formatNamespace(namespace))
 
-formatNamespace = (namespace) -> "APP.#{ namespace }"
+formatNamespace = (namespace) ->
+  if Object.isString(namespace)
+    "APP.#{ namespace.remove(/^APP./) }"
 
 
 # ----------------------------------------------------------------------
