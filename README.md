@@ -9,7 +9,7 @@ be given it's own package.
 
 ## Run Tests
 
-    meteor test-packages --driver-package mike:pkgtest util
+    meteor test-packages --driver-package mike:pkgtest respondly:util
 
 
 

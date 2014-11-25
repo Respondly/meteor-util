@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'util',
+  name: 'respondly:util',
   summary: 'Common utility helpers.',
   version: '1.0.0',
   git: 'https://github.com/Respondly/meteor-util.git'
@@ -94,7 +94,7 @@ Package.on_use(function (api) {
 
 Package.on_test(function (api) {
   api.use(['mike:mocha-package@0.4.7', 'coffeescript']);
-  api.use('util');
+  api.use('respondly:util');
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.add_files('tests/shared/_init.coffee', ['client', 'server']);
