@@ -1,6 +1,10 @@
 Package.describe({
-  summary: 'Common utility helpers.'
+  name: 'util',
+  summary: 'Common utility helpers.',
+  version: '1.0.0',
+  git: 'https://github.com/Respondly/meteor-util.git'
 });
+
 
 
 Npm.depends({
@@ -89,7 +93,7 @@ Package.on_use(function (api) {
 
 
 Package.on_test(function (api) {
-  api.use(['munit', 'coffeescript']);
+  api.use(['mike:mocha-package@0.4.7', 'coffeescript']);
   api.use('util');
 
   // Generated with: github.com/philcockfield/meteor-package-paths
