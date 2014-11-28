@@ -56,6 +56,7 @@ Package.onUse(function (api) {
   api.addFiles('shared/helpers/date.coffee', ['client', 'server']);
   api.addFiles('shared/helpers/email.coffee', ['client', 'server']);
   api.addFiles('shared/helpers/html.coffee', ['client', 'server']);
+  api.addFiles('shared/helpers/path.coffee', ['client', 'server']);
   api.addFiles('shared/helpers/position.coffee', ['client', 'server']);
   api.addFiles('shared/helpers/string.coffee', ['client', 'server']);
   api.addFiles('shared/helpers/timer.coffee', ['client', 'server']);
@@ -71,7 +72,10 @@ Package.onUse(function (api) {
   api.addFiles('server/server.publish.coffee', 'server');
   api.addFiles('client/dom/css.coffee', 'client');
   api.addFiles('client/classes/controller-base.coffee', 'client');
+  api.addFiles('client/classes/draggable.coffee', 'client');
+  api.addFiles('client/classes/events.coffee', 'client');
   api.addFiles('client/classes/keyboard-controller.coffee', 'client');
+  api.addFiles('client/classes/keyboard.coffee', 'client');
   api.addFiles('client/classes/scoped-session.coffee', 'client');
   api.addFiles('client/classes/subscriptions.coffee', 'client');
   api.addFiles('client/classes/user-agent.coffee', 'client');
@@ -82,14 +86,10 @@ Package.onUse(function (api) {
   api.addFiles('client/dom/jquery.coffee', 'client');
   api.addFiles('client/dom/pulse.coffee', 'client');
   api.addFiles('client/dom/style.coffee', 'client');
-  api.addFiles('client/db.coffee', 'client');
-  api.addFiles('client/draggable.coffee', 'client');
-  api.addFiles('client/events.coffee', 'client');
-  api.addFiles('client/fonts.coffee', 'client');
-  api.addFiles('client/keyboard-controller.coffee', 'client');
-  api.addFiles('client/keyboard.coffee', 'client');
-  api.addFiles('client/keys.coffee', 'client');
-  api.addFiles('client/local-storage.coffee', 'client');
+  api.addFiles('client/helpers/db.coffee', 'client');
+  api.addFiles('client/helpers/fonts.coffee', 'client');
+  api.addFiles('client/helpers/keys.coffee', 'client');
+  api.addFiles('client/helpers/local-storage.coffee', 'client');
 
 });
 
@@ -109,6 +109,7 @@ Package.onTest(function (api) {
   api.addFiles('tests/shared/handlers.coffee', ['client', 'server']);
   api.addFiles('tests/shared/html.coffee', ['client', 'server']);
   api.addFiles('tests/shared/ns.coffee', ['client', 'server']);
+  api.addFiles('tests/shared/path.coffee', ['client', 'server']);
   api.addFiles('tests/shared/position.coffee', ['client', 'server']);
   api.addFiles('tests/shared/reactive-array.coffee', ['client', 'server']);
   api.addFiles('tests/shared/reactive-hash.coffee', ['client', 'server']);
