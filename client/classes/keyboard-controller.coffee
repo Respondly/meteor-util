@@ -1,10 +1,10 @@
 ###
-Base class for UI controllers.
+Base class for controllers that react to key events.
 ###
 class KeyboardController extends ControllerBase
   constructor: ->
     super
-    @_keyDownHandlers = new Handlers()
+    @__internal__.keyDownHandlers = new Handlers()
     lastArgs = null
 
     $(document).keydown (e) =>
@@ -30,7 +30,7 @@ class KeyboardController extends ControllerBase
       #       but keys pressed after that will not register, until the CMD key is released.
 
       # Invoke handlers.
-      if @_keyDownHandlers.invoke(args) isnt false
+      if @__internal__.keyDownHandlers.invoke(args) isnt false
         @onKeyDown(args)
 
       # Finish up.
@@ -39,8 +39,10 @@ class KeyboardController extends ControllerBase
 
 
     $(document).keyup (e) =>
-      if lastArgs and (not Util.keys.isModifier(e.keyCode) or Util.keys.isMeta(e.keyCode))
+      args = Util.keys.toArgs(e)
+      if lastArgs and (not args.isModifier() or args.isMeta())
         lastArgs = null
+        @onKeyUp(args)
 
 
 
@@ -49,13 +51,13 @@ class KeyboardController extends ControllerBase
   ###
   dispose: ->
     super
-    @_keyDownHandlers.dispose()
+    @__internal__.keyDownHandlers.dispose()
 
 
 
   ###
   OVERRIDABLE: Invoked when a key is pressed.
-  @param e: The key event args
+  @param args: The key event args.
   ###
   onKeyDown: (args) -> # No-op.
 
@@ -65,8 +67,15 @@ class KeyboardController extends ControllerBase
   Registers a function to invoke before the [onKeyDown] handler is run.
   @param func(args): The function to add.
   ###
-  keyDown: (func) -> @_keyDownHandlers.push(func)
+  keyDown: (func) -> @__internal__.keyDownHandlers.push(func)
 
+
+
+  ###
+  OVERRIDABLE: Invoked when a key is released.
+  @param args: The key event args.
+  ###
+  onKeyUp: (args) -> # No-op.
 
 
 
