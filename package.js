@@ -32,8 +32,10 @@ Package.onUse(function (api) {
   api.export('Server');
   api.export('Fonts');
   api.export('Service');
+  api.export('Stamps');
 
   // Generated with: github.com/philcockfield/meteor-package-paths
+  api.addFiles('shared/ns.js', ['client', 'server']);
   api.addFiles('shared/helpers/util.coffee', ['client', 'server']);
   api.addFiles('shared/helpers/ns.coffee', ['client', 'server']);
   api.addFiles('shared/classes/reactive-hash.coffee', ['client', 'server']);
@@ -59,7 +61,7 @@ Package.onUse(function (api) {
   api.addFiles('shared/helpers/user-agent.coffee', ['client', 'server']);
   api.addFiles('shared/libs/stampit.js', ['client', 'server']);
   api.addFiles('shared/libs/sugar.js', ['client', 'server']);
-  api.addFiles('shared/ns.js', ['client', 'server']);
+  api.addFiles('shared/stamps/auto-run.coffee', ['client', 'server']);
   api.addFiles('server/client-settings.server.coffee', 'server');
   api.addFiles('server/db.coffee', 'server');
   api.addFiles('server/fonts.coffee', 'server');

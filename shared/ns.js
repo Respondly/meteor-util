@@ -1,1 +1,4 @@
+//= base
+
 Service = {};
+Stamps = {};
