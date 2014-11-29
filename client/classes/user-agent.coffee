@@ -46,7 +46,7 @@ class UserAgent
   ###
   toObject: ->
     result = {}
-    for own key, value of @
+    for key, value of @
       result[key] = @[key]() if key.startsWith('is')
     result
 
