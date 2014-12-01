@@ -74,7 +74,7 @@ class Handlers
   ###
   invoke: (args...) ->
     for item in @items.clone()
-      result = Deps.nonreactive => item.func.apply(@context, args)
+      result = nonreactive => item.func.apply(@context, args)
       return false if result is false
     true
 
@@ -86,7 +86,7 @@ class Handlers
   ###
   firstResult: (args...) ->
     for item in @items.clone()
-      result = Deps.nonreactive => item.func.apply(@context, args)
+      result = nonreactive => item.func.apply(@context, args)
       return result if result?
 
 
@@ -98,7 +98,7 @@ class Handlers
   results: (args...) ->
     results = []
     for item in @items.clone()
-      result = Deps.nonreactive => item.func.apply(@context, args)
+      result = nonreactive => item.func.apply(@context, args)
       results.push(result)
     results
 
@@ -127,7 +127,7 @@ class Handlers
 
     args.push(done)
     for item in @items.clone()
-      Deps.nonreactive =>
+      nonreactive =>
         item.func.apply(@context, args)
 
 
@@ -151,3 +151,10 @@ createHandle = (handlers, func) ->
 
 
 
+nonreactive = (func) ->
+  # Ensure handlers can be setup prior to
+  # Deps being available.
+  if Deps?
+    Deps.nonreactive(func)
+  else
+    func()
