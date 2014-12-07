@@ -29,7 +29,8 @@ Meteor.startup ->
     walk = (el) ->
         return if el.length is 0
         parent = el.parent()
-        return if parent[0].nodeName is '#document'
+        return if not parent[0]?
+        return if parent[0]?.nodeName is '#document'
 
         position  = parent.css('position')
         overflowY = parent.css('overflow-y')
