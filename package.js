@@ -64,6 +64,7 @@ Package.onUse(function (api) {
   api.addFiles('shared/libs/stampit.js', ['client', 'server']);
   api.addFiles('shared/libs/sugar.js', ['client', 'server']);
   api.addFiles('shared/stamps/auto-run.coffee', ['client', 'server']);
+  api.addFiles('shared/stamps/disposable.coffee', ['client', 'server']);
   api.addFiles('server/client-settings.server.coffee', 'server');
   api.addFiles('server/db.coffee', 'server');
   api.addFiles('server/fonts.coffee', 'server');

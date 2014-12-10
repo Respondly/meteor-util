@@ -3,7 +3,6 @@ Provides a safe way to start an auto-run.
 Call @autorun.stop() to stop all registered handlers.
 ###
 Stamps.AutoRun = stampit().enclose ->
-
   ###
   Registers an auto-run function.
   @param func: The function to execute.
@@ -31,6 +30,14 @@ Stamps.AutoRun = stampit().enclose ->
     handles?.each (handle) -> handle?.stop()
     @autorun.handles = []
     @
+
+
+  # Hook into [onDisposed] callback if it's been
+  # composed into the object.
+  # See: [Stamps.Disposable]
+  @onDisposed? =>
+    @autorun.dispose()
+
 
 
 
