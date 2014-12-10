@@ -9,8 +9,23 @@ class ReactiveHash
             - onlyOnChange: The default [onlyOnChange] value.
   ###
   constructor: (options = {}) ->
+    keyDeps = {}
+    equalityDeps = {}
+
+    @__internal__ =
+      keyDeps: keyDeps
+      equalityDeps: equalityDeps
+
+      ensureKeyDeps: (key) ->
+          # Used by [get/set/prop].
+          keyDeps[key] = new Tracker.Dependency() unless keyDeps[key]
+          keyDeps[key]
+
+      ensureEqualityDeps: (key) ->
+          # Used by [equals].
+          equalityDeps[key] ?= {}
+
     @keys = {}
-    @_deps = {}
     @onlyOnChange = options.onlyOnChange ? false
 
 
@@ -20,7 +35,8 @@ class ReactiveHash
   dispose: ->
     @isDisposed = true
     @keys = {}
-    @_deps = {}
+    @__internal__ = {}
+
 
 
   ###
@@ -31,18 +47,19 @@ class ReactiveHash
 
 
   ###
-  Gets the value at the given key.
+  REACTIVE: Gets the value at the given key.
   @param key: The unique identifier of the value (this is prefixed with the namespace).
   ###
   get: (key) =>
     return if @isDisposed
-    @deps(key).depend()
+    @__internal__.ensureKeyDeps(key).depend()
     @keys[key]
+
 
 
   ###
   Sets the given value
-  @param key:   The unique identifier of the value (this is prefixed with the namespace).
+  @param key:   The unique identifier of the value.
   @param value: The value to set (pass nothing/undefined to remove).
   @param options:
             onlyOnChange:  (optional). Will only call set if the value has changed.
@@ -56,9 +73,21 @@ class ReactiveHash
     if onlyOnChange and Object.equal(value, @keys[key])
       return value
 
+    # Store a reference to the value.
     if value is undefined then delete @keys[key] else @keys[key] = value
-    @deps(key).changed()
 
+    # Signal change to [get/prop] dependencies.
+    @__internal__.ensureKeyDeps(key).changed()
+
+    # Signal a change if an [equals] dependency has been setup.
+    if canSerialize(value)
+      if ref = @__internal__.equalityDeps[key]
+        hashKey = toHashKey(value)
+        isEqual = Object.equal(ref.value[hashKey], value)
+        ref.dependency.changed() if isEqual isnt ref.isEqual
+        ref.isEqual = isEqual
+
+    # Finish up.
     value
 
 
@@ -76,17 +105,9 @@ class ReactiveHash
   clear: -> @unset(key) for key of @keys
 
 
-  ###
-  Gets the dependency object for the given key.
-  ###
-  deps: (key) ->
-    @_deps[key] = new Deps.Dependency() unless @_deps[key]
-    @_deps[key]
-
-
 
   ###
-  Gets or sets the value for the given key.
+  REACTIVE: Gets or sets the value for the given key.
   @param key:         The unique identifier of the value (this is prefixed with the namespace).
   @param value:       (optional). The value to set (pass null to remove).
   @param options:
@@ -104,6 +125,77 @@ class ReactiveHash
       value = options.default if value is undefined
 
     value
+
+
+
+  ###
+  Checks for equality and only re-runs dependencies if the value
+  has changed.
+
+  ###
+  equals: (key, value) ->
+    return if @isDisposed
+
+    # Don't allow objects as they cannot be serialized as a key.
+    if not canSerialize(value)
+      throw new Error('ReactiveHash.equals: value must be scalar')
+
+
+    # Get the dependency model.
+    hashKey = toHashKey(value)
+    ref = @__internal__.ensureEqualityDeps(key)
+
+    # - First time call, initialize the dependency reference.
+    if Object.isEmpty(ref)
+      isNew = true
+      ref.dependency = new Tracker.Dependency()
+
+      # Prevent memory lead: Remove references when there are no
+      # longer any dependent functions.
+      Tracker.onInvalidate =>
+          Tracker.afterFlush =>
+            unless ref.dependency.hasDependents()
+              delete @__internal__.equalityDeps[key]
+
+    # Store the requested value.
+    ref.value ?= {}
+    ref.value[hashKey] = value
+    ref.dependency.depend()
+
+    # Calculate initial equality.
+    # NOTE: Future checks (and change signalling) occurs
+    #       within the [set] method.
+    currentValue = Tracker.nonreactive => @get(key)
+    isEqual = ref.isEqual = Object.equal(value, currentValue)
+
+    # Finish up.
+    isNew = false
+    isEqual
+
+
+
+# PRIVATE ----------------------------------------------------------------------
+
+
+
+# [Mongo.ObjectID] is in the 'mongo' package.
+ObjectID = null
+ObjectID = Mongo.ObjectID if Mongo?
+
+canSerialize = (value) ->
+    return true if not value?
+    return true if Object.isString(value)
+    return true if Object.isNumber(value)
+    return true if Object.isBoolean(value)
+    return true if Object.isDate(value)
+    if ObjectID
+      return true if (value instanceof ObjectID)
+    false
+
+
+toHashKey = (value) ->
+  return undefined if value is undefined
+  EJSON.stringify(value)
 
 
 
