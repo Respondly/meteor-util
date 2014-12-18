@@ -8,9 +8,8 @@ be given it's own package.
 
 
 ## Run Tests
-From the package folder:
 
-    mrt test-packages util
+    meteor test-packages --driver-package mike:pkgtest respondly:util
 
 
 

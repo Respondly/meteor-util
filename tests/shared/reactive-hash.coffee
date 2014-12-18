@@ -64,7 +64,7 @@ describe.client 'ReactiveHash: reactivity', ->
     hash.set 'foo', 'value'
 
     Util.delay 0, =>
-      @try -> expect(count).to.equal 1
+      expect(count).to.equal 1
       done()
 
 
@@ -81,7 +81,7 @@ describe.client 'ReactiveHash: reactivity', ->
       hash.unset('key')
 
       Util.delay 0, =>
-        @try -> expect(count).to.equal 2
+        expect(count).to.equal 2
         done()
 
 
@@ -102,9 +102,8 @@ describe.client 'ReactiveHash: reactivity', ->
     Util.delay 0, =>
       hash.clear()
       Util.delay 0, =>
-        @try ->
-          expect(fooCount).to.equal 2
-          expect(barCount).to.equal 2
+        expect(fooCount).to.equal 2
+        expect(barCount).to.equal 2
         done()
 
 
@@ -119,7 +118,7 @@ describe.client 'ReactiveHash: reactivity', ->
     Util.delay 0, =>
       hash.set 'foo', null
       Util.delay 0, =>
-        @try -> expect(count).to.equal 2
+        expect(count).to.equal 2
         done()
 
 
@@ -135,7 +134,7 @@ describe.client 'ReactiveHash: reactivity', ->
 
     Util.delay 0, =>
       Util.delay 0, =>
-        @try -> expect(count).to.equal 0
+        expect(count).to.equal 0
         done()
 
 
@@ -152,7 +151,7 @@ describe.client 'ReactiveHash: reactivity', ->
     Util.delay 5, -> hash.set('foo', 123, onlyOnChange:true)
 
     Util.delay 10, =>
-        @try -> expect(count).to.equal 1
+        expect(count).to.equal 1
         done()
 
   it 'call dependencies only when set value is changed ("onlyOnChange" as default parameter)', (done) ->
@@ -168,7 +167,7 @@ describe.client 'ReactiveHash: reactivity', ->
     Util.delay 5, -> hash.set('foo', 123)
 
     Util.delay 10, =>
-        @try -> expect(count).to.equal 1
+        expect(count).to.equal 1
         done()
 
 
@@ -237,7 +236,7 @@ describe 'ReactiveHash.prop - onlyOnChange', ->
     Util.delay =>
         fn(123)
         Util.delay =>
-          @try -> expect(count).to.equal 2
+          expect(count).to.equal 2
           done()
 
 
@@ -252,7 +251,7 @@ describe 'ReactiveHash.prop - onlyOnChange', ->
     Util.delay =>
       fn(123)
       Util.delay =>
-        @try -> expect(count).to.equal 1
+        expect(count).to.equal 1
         done()
 
 
@@ -267,7 +266,7 @@ describe 'ReactiveHash.prop - onlyOnChange', ->
     Util.delay =>
       fn([1,2,3])
       Util.delay =>
-        @try -> expect(count).to.equal 1
+        expect(count).to.equal 1
         done()
 
 
@@ -288,7 +287,7 @@ describe 'ReactiveHash.prop (reactivity)', ->
     Util.delay =>
       fn(123)
       Util.delay =>
-        @try -> expect(count).to.equal 2
+        expect(count).to.equal 2
         done()
 
 
@@ -303,7 +302,7 @@ describe 'ReactiveHash.prop (reactivity)', ->
     Util.delay =>
       fn(null)
       Util.delay =>
-        @try -> expect(count).to.equal 2
+        expect(count).to.equal 2
         done()
 
 
@@ -319,7 +318,7 @@ describe 'ReactiveHash.prop (reactivity)', ->
     Util.delay -> fn(123)
     Util.delay 5, -> fn(123)
     Util.delay 10, =>
-      @try -> expect(count).to.equal 1
+      expect(count).to.equal 1
       done()
 
 
@@ -337,7 +336,7 @@ describe 'ReactiveHash.prop (reactivity)', ->
     Util.delay 5, -> fn(123)
 
     Util.delay 10, =>
-      @try -> expect(count).to.equal 1
+      expect(count).to.equal 1
       done()
 
 

@@ -5,9 +5,8 @@ describe 'Delay (Timer)', ->
 
   it 'delays for a given amount of time', (done) ->
     Util.delay 50, =>
-        @try ->
-          elapsed = startedAt.millisecondsAgo()
-          expect(elapsed >= 50).to.equal true
+        elapsed = startedAt.millisecondsAgo()
+        expect(elapsed >= 50).to.equal true
         done()
 
 
@@ -23,7 +22,7 @@ describe 'Delay (Timer)', ->
     result.stop()
 
     onTimeout = =>
-        @try -> expect(wasCompleted).to.equal false
+        expect(wasCompleted).to.equal false
         done()
     Meteor.setTimeout(onTimeout, 50)
 

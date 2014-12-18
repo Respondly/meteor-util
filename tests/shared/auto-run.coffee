@@ -22,8 +22,7 @@ describe 'AutoRun', ->
     hash.set('foo', 123)
     expect(value).to.equal undefined
     Util.delay =>
-      @try ->
-        expect(value).to.equal 123
+      expect(value).to.equal 123
       done()
 
   it 'clears and stops handles when disposed', ->

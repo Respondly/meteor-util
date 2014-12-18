@@ -155,9 +155,8 @@ describe 'Handlers.invokeAsync', ->
 
   it 'invokes returns true when there are no handlers', (done) ->
     handlers.invokeAsync (result, err) =>
-      @try ->
-        expect(result).to.equal true
-        expect(err).to.equal undefined
+      expect(result).to.equal true
+      expect(err).to.equal undefined
       done()
 
   it 'invokes handlers returning true', (done) ->
@@ -170,9 +169,8 @@ describe 'Handlers.invokeAsync', ->
       Util.delay -> done()
 
     handlers.invokeAsync (result, err) =>
-      @try ->
-        expect(count).to.equal 2
-        expect(result).to.equal true
+      expect(count).to.equal 2
+      expect(result).to.equal true
       done()
 
 
@@ -183,9 +181,8 @@ describe 'Handlers.invokeAsync', ->
     handlers.add (done) -> finalHandlerSkipped = false
 
     handlers.invokeAsync (result) =>
-      @try ->
-        expect(result).to.equal false
-        expect(finalHandlerSkipped).to.equal true
+      expect(result).to.equal false
+      expect(finalHandlerSkipped).to.equal true
       done()
 
 
@@ -202,16 +199,14 @@ describe 'Handlers.invokeAsync', ->
       done()
 
     handlers.invokeAsync 123, 'abc', (result) =>
-      @try ->
-        expect(param1).to.equal 123
-        expect(param2).to.equal 'abc'
+      expect(param1).to.equal 123
+      expect(param2).to.equal 'abc'
       done()
 
   it 'returns true when invoking with no handlers', (done) ->
     handlers = new Handlers()
     handlers.invokeAsync (result) =>
-      @try ->
-        expect(result).to.equal true
+      expect(result).to.equal true
       done()
 
 
