@@ -1,7 +1,7 @@
 Package.describe({
   name: 'respondly:util',
   summary: 'Common utility helpers.',
-  version: '1.0.1',
+  version: '1.0.2',
   git: 'https://github.com/Respondly/meteor-util.git'
 });
 
@@ -14,7 +14,7 @@ Npm.depends({
 
 Package.onUse(function (api) {
   // api.versionsFrom('1.0');
-  api.use(['coffeescript']);
+  api.use(['coffeescript@1.0.5']);
   api.export('Util');
   api.export('ReactiveHash');
   api.export('ReactiveArray');
