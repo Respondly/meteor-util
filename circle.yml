@@ -5,4 +5,6 @@ dependencies:
 
 test:
   override:
-    - PACKAGE_DIRS="." meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:util
+    - export PACKAGE_DIRS=`pwd`
+    - printenv PACKAGE_DIRS
+    - meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:util
