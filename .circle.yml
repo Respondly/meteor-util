@@ -1,0 +1,7 @@
+checkout:
+  post:
+    - curl https://install.meteor.com | /bin/sh
+
+test:
+  override:
+    - meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:test-reporter -p 1234
