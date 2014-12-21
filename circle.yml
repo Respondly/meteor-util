@@ -9,9 +9,9 @@ dependencies:
     # might make more sense to use the one checked into atmosphere
     # ideally this would be verison locked too, so builds were more reproducable
     - git clone https://github.com/respondly/meteor-test-reporter $HOME/respondly:test-reporter
-    - git clone https://github.com/respondly/respondly:css-stylus
-    - git clone https://github.com/respondly/respondly:css-common
-    - git clone https://github.com/respondly/respondly:ctrl
+    - git clone https://github.com/respondly/meteor-css-stylus respondly:css-stylus
+    - git clone https://github.com/respondly/meteor-css-common respondly:css-common
+    - git clone https://github.com/respondly/meteor-ctrl respondly:ctrl
 
 test:
   override:
