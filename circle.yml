@@ -2,8 +2,11 @@ dependencies:
   post:
     - curl https://install.meteor.com | /bin/sh
     - meteor --release mike:METEOR@1.0.2 --version
+    # might make more sense to use the one checked into atmosphere
+    # ideally this would be verison locked too, so builds were more reproducable
+    - git clone https://github.com/respondly/meteor-test-reporter
 
 test:
   override:
-    - PACKAGE_DIRS=".." meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:util
+    - PACKAGE_DIRS="..:$HOME" meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:util
 
