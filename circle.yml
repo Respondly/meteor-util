@@ -5,5 +5,5 @@ dependencies:
 
 test:
   override:
-    - meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:util
-      environment: PACKAGE_DIRS: "."
+    - PACKAGE_DIRS=".." meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:util
+
