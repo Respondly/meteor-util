@@ -1,10 +1,8 @@
 dependencies:
-  pre: "mkdir -p ~/.meteor"
-
   cache_directories:
     - "~/.meteor"
 
-  post:
+  override:
     - curl https://install.meteor.com | /bin/sh
     - meteor --release mike:METEOR@1.0.2 --version
     # install reporter package and dependencies
