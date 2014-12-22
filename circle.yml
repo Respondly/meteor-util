@@ -1,6 +1,8 @@
 dependencies:
-  cache_directories:
-    - ../.meteor"
+  #TODO get this working for faster builds
+  #it might be that only dirs in the project can be cached?
+  # cache_directories:
+  #   - ../.meteor"
 
   post:
     - curl https://install.meteor.com | /bin/sh
