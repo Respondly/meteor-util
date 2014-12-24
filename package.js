@@ -14,7 +14,7 @@ Npm.depends({
 
 Package.onUse(function (api) {
   // api.versionsFrom('1.0');
-  api.use(['coffeescript@1.0.5']);
+  api.use(['coffeescript@1.0.4']);
   api.export('Util');
   api.export('ReactiveHash');
   api.export('ReactiveArray');
