@@ -14,7 +14,7 @@ Npm.depends({
 
 Package.onUse(function (api) {
   // api.versionsFrom('1.0');
-  api.use(['coffeescript@1.0.5']);
+  api.use(['coffeescript']);
   api.export('Util');
   api.export('ReactiveHash');
   api.export('ReactiveArray');
@@ -48,8 +48,6 @@ Package.onUse(function (api) {
   api.addFiles('shared/classes/query-string.coffee', ['client', 'server']);
   api.addFiles('shared/classes/reactive-array.coffee', ['client', 'server']);
   api.addFiles('shared/classes/url.coffee', ['client', 'server']);
-  api.addFiles('shared/const/const.coffee', ['client', 'server']);
-  api.addFiles('shared/const/const-keys.coffee', ['client', 'server']);
   api.addFiles('shared/helpers/client-settings.shared.coffee', ['client', 'server']);
   api.addFiles('shared/helpers/compound-values.coffee', ['client', 'server']);
   api.addFiles('shared/helpers/conversion.coffee', ['client', 'server']);
@@ -65,6 +63,7 @@ Package.onUse(function (api) {
   api.addFiles('shared/libs/sugar.js', ['client', 'server']);
   api.addFiles('shared/stamps/auto-run.coffee', ['client', 'server']);
   api.addFiles('shared/stamps/disposable.coffee', ['client', 'server']);
+  api.addFiles('shared/const.coffee', ['client', 'server']);
   api.addFiles('server/client-settings.server.coffee', 'server');
   api.addFiles('server/db.coffee', 'server');
   api.addFiles('server/fonts.coffee', 'server');
