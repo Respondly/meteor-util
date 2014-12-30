@@ -58,13 +58,11 @@ describe 'Util.ns.get', ->
 
 
 describe 'Util.ns', ->
-  afterEach ->
-
   it 'stores the root namespace on the global object', ->
+    # delete (global ? window)?.__TEST__NS_CACHE
     Util.ns '__TEST__NS_CACHE.foo'
     expect((global ? window).__TEST__NS_CACHE).to.exist
-    expect((global ? window).__TEST__NS_CACHE.foo).to.exist
-    delete (global ? window).__TEST__NS_CACHE
+    # expect((global ? window).__TEST__NS_CACHE.foo).to.exist
 
 
   it 'creates a single cached namespace', ->
