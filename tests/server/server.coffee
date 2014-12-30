@@ -48,5 +48,5 @@ describe 'Server.sleep', ->
     startedAt = new Date()
     expect(startedAt.millisecondsAgo()).to.be.below 50
     Server.sleep(50)
-    expect(startedAt.millisecondsAgo()).to.be.above 50
+    expect(startedAt.millisecondsAgo() >= 50).to.equal true
 
