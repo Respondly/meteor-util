@@ -18,5 +18,5 @@ dependencies:
 
 test:
   override:
-    - PACKAGE_DIRS="..:$HOME" meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:util
+    - PACKAGE_DIRS="..:$HOME" meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:util 2>&1
 
