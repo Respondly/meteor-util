@@ -22,3 +22,22 @@ Util.delay = (msecs, func) ->
     stop: -> Meteor.clearTimeout(@id)
 
 
+###
+Provides a more convenient way of setting an interval.
+
+@param msecs:  The period of the function call in milliseconds.
+@param func:   The function to invoke.
+
+@returns  The interval handle.
+          Use the [stop] method to cancel the interval.
+###
+Util.interval = (msecs, func) ->
+  # both arguments required
+  return unless Object.isNumber(msecs)
+  return unless Object.isFunction(func)
+
+  # Return an object with the running timer.
+  result =
+    msecs: msecs
+    id:    Meteor.setInterval(func, msecs)
+    stop: -> Meteor.clearInterval(@id)
