@@ -1,6 +1,8 @@
 # Util
 Common utility helpers.
 
+[![Circle CI](https://circleci.com/gh/Respondly/meteor-util.svg?style=svg)](https://circleci.com/gh/Respondly/meteor-util)
+
 **Note:** Everything here could conceivabely be broken out into seperate
 packages, and if there is anything of significant size, it should
 be given it's own package.
