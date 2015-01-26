@@ -6,7 +6,6 @@ dependencies:
   override:
     # download if meteor isn't already installed in the cache
     - meteor || curl https://install.meteor.com | /bin/sh
-    - meteor --release mike:METEOR@1.0.2 --version
     # install reporter package and dependencies
     # might make more sense to use the one checked into atmosphere
     # ideally this would be verison locked too, so builds were more reproducable
@@ -18,5 +17,5 @@ dependencies:
 
 test:
   override:
-    - PACKAGE_DIRS="..:$HOME" meteor --release mike:METEOR@1.0.2 test-packages --velocity --driver-package respondly:test-reporter respondly:util 2>&1
+    - PACKAGE_DIRS="..:$HOME" meteor test-packages --velocity --driver-package respondly:test-reporter respondly:util 2>&1
 
