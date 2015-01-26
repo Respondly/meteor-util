@@ -1,4 +1,5 @@
 //= base
 
+Collector = {};
 Service = {};
 Stamps = {};

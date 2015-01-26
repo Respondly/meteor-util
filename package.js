@@ -32,6 +32,7 @@ Package.onUse(function (api) {
   api.export('Url');
   api.export('Server');
   api.export('Fonts');
+  api.export('Collector');
   api.export('Service');
   api.export('Stamps');
 
