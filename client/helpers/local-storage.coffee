@@ -22,6 +22,8 @@ LocalStorage =
                 'null'
               else if Object.isNumber(value)
                 'number'
+              else if Object.isDate(value)
+                'date'
               else
                 'object'
 
@@ -35,6 +37,7 @@ LocalStorage =
         value = switch json.type
                   when 'null', 'bool', 'string' then json.value
                   when 'number' then json.value.toNumber()
+                  when 'date' then new Date(json.value)
                   when 'object' then json.value
 
       else
