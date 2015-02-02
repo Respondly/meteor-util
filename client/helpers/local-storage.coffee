@@ -1,3 +1,5 @@
+hash = new ReactiveHash(onlyOnChange:true)
+
 LocalStorage =
   ###
   Gets or sets the value for the given key.
@@ -7,6 +9,9 @@ LocalStorage =
             default:  (optional). The default value to return if the session does not contain the value (ie. undefined).
   ###
   prop: (key, value, options = {}) ->
+    # Ensure the read operations are reactive.
+    hash.prop(key, value, options)
+
     if value isnt undefined
       # WRITE.
       type =  if Object.isString(value)
