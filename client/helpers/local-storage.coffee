@@ -12,14 +12,16 @@ LocalStorage =
     # Ensure the read operations are reactive.
     hash.prop(key, value, options)
 
-    if value isnt undefined
+    if value is null
+      # REMOVE.
+      localStorage.removeItem(key)
+
+    else if value isnt undefined
       # WRITE.
       type =  if Object.isString(value)
                 'string'
               else if Object.isBoolean(value)
                 'bool'
-              else if value is null
-                'null'
               else if Object.isNumber(value)
                 'number'
               else if Object.isDate(value)
@@ -46,4 +48,3 @@ LocalStorage =
 
     # Finish up.
     value
-
