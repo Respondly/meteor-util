@@ -6,14 +6,22 @@ Extends a stamp to support events with the methods:
   - trigger
 
 ###
-Stamps.Events = stampit().enclose ->
+if Meteor.isServer
+  EventEmitter = Npm.require('events').EventEmitter
 
-  if Meteor.isServer
-    throw new Meteor.Error(500, 'Not yet supported on server')
+  EventEmitterStamp = stampit().enclose ->
+    @trigger = (eventName, args) -> @emit(eventName, args)
+    @off = (eventName) -> @removeAllListeners(eventName)
 
-  if Meteor.isClient
-    Util.Events.extends(@)
+    return @
 
+  Stamps.Events = stampit.compose(
+    stampit.convertConstructor(EventEmitter)
+    EventEmitterStamp
+  )
 
-  # ----------------------------------------------------------------------
-  return @
+if Meteor.isClient
+  Stamps.Events = stampit().enclose ->
+    Util.Events.extend(@)
+    # ----------------------------------------------------------------------
+    return @

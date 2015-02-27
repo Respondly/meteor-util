@@ -33,11 +33,9 @@ Package.onUse(function (api) {
   api.export('Server');
   api.export('Fonts');
   api.export('Stamps');
-
   // Exported namespaces - code in other packages.
   api.export('Collector');
   api.export('Service');
-
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.addFiles('shared/ns.js', ['client', 'server']);
@@ -67,6 +65,7 @@ Package.onUse(function (api) {
   api.addFiles('shared/libs/sugar.js', ['client', 'server']);
   api.addFiles('shared/stamps/auto-run.coffee', ['client', 'server']);
   api.addFiles('shared/stamps/disposable.coffee', ['client', 'server']);
+  api.addFiles('shared/stamps/events.coffee', ['client', 'server']);
   api.addFiles('shared/const.coffee', ['client', 'server']);
   api.addFiles('server/client-settings.server.coffee', 'server');
   api.addFiles('server/db.coffee', 'server');
@@ -110,6 +109,7 @@ Package.onTest(function (api) {
   api.addFiles('tests/shared/conversion.coffee', ['client', 'server']);
   api.addFiles('tests/shared/date.coffee', ['client', 'server']);
   api.addFiles('tests/shared/email.coffee', ['client', 'server']);
+  api.addFiles('tests/shared/events.coffee', ['client', 'server']);
   api.addFiles('tests/shared/handlers.coffee', ['client', 'server']);
   api.addFiles('tests/shared/html.coffee', ['client', 'server']);
   api.addFiles('tests/shared/ns.coffee', ['client', 'server']);
