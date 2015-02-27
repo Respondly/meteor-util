@@ -32,9 +32,12 @@ Package.onUse(function (api) {
   api.export('Url');
   api.export('Server');
   api.export('Fonts');
+  api.export('Stamps');
+
+  // Exported namespaces - code in other packages.
   api.export('Collector');
   api.export('Service');
-  api.export('Stamps');
+
 
   // Generated with: github.com/philcockfield/meteor-package-paths
   api.addFiles('shared/ns.js', ['client', 'server']);
