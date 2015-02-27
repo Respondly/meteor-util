@@ -30,7 +30,7 @@ describe 'LocalStorage.prop (Data Types)', ->
   it 'null', ->
     myProp('hello')
     myProp(null)
-    expect(myProp()).to.equal null
+    expect(localStorage.getItem('foo')).to.equal null
 
 
   it 'bool', ->
@@ -65,4 +65,3 @@ describe 'LocalStorage.prop (Data Types)', ->
     expect(myProp()).to.eql {}
     myProp({ number:12.5, text:'string', obj:{}, bool:true })
     expect(myProp()).to.eql { number:12.5, text:'string', obj:{}, bool:true }
-
