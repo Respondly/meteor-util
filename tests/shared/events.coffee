@@ -13,7 +13,8 @@ describe 'Stampit.Events', ->
     triggerable.trigger('ding', eventData)
 
   it 'removes an event', (done) ->
+    # if on get's triggered expect something that will always fail
     triggerable.on 'ding', => expect(true).to.be.false;
     triggerable.off 'ding'
     triggerable.trigger('ding')
-    Util.delay => done()
+    Util.delay 100, => done()
