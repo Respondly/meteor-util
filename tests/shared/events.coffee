@@ -14,7 +14,7 @@ describe 'Stampit.Events', ->
 
   it 'removes an event', (done) ->
     # if on get's triggered expect something that will always fail
-    triggerable.on 'ding', => expect(true).to.be.false;
+    triggerable.on 'ding', => throw new Error("This should not be called")
     triggerable.off 'ding'
     triggerable.trigger('ding')
     Util.delay 100, => done()
