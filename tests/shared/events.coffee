@@ -16,4 +16,4 @@ describe 'Stampit.Events', ->
     triggerable.on 'ding', => expect(true).to.be.false;
     triggerable.off 'ding'
     triggerable.trigger('ding')
-    Util.delay 1000, => done()
+    Util.delay => done()
