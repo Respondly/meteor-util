@@ -22,7 +22,7 @@ local-test:respondly:util@1.0.2
 logging@1.0.6
 meteor@1.1.4
 mike:html-reporter@0.3.2
-mike:mocha-package@0.4.7
+mike:mocha-package@0.5.6
 minifiers@1.1.3
 minimongo@1.0.6
 mongo@1.0.10
