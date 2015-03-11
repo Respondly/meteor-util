@@ -10,13 +10,15 @@ if Meteor.isServer
   EventEmitter = Npm.require('events').EventEmitter
 
   EventEmitterStamp = stampit().enclose ->
-    @trigger = (eventName, args) -> @emit(eventName, undefined, args)
-    @off = (eventName) -> @removeAllListeners(eventName)
+    eventEmitter = new EventEmitter()
+
+    @on = (eventName, func) -> eventEmitter.on(eventName, func)
+    @trigger = (eventName, args) -> eventEmitter.emit(eventName, undefined, args)
+    @off = (eventName) -> eventEmitter.removeAllListeners(eventName)
 
     return @
 
   Stamps.Events = stampit.compose(
-    stampit.convertConstructor(EventEmitter)
     EventEmitterStamp
   )
 
