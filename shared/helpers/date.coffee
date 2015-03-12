@@ -22,11 +22,13 @@ Formats a date into an readable elapsed time, eg:
 
       formatElapsed( date, asParts:true ).display
 
-  @param date: The [Date] to format, or the total seconds (number).
+  @param date:        The [Date] to format,
+                      or the total seconds (number).
+
   @param options:
             asParts:  Flag indicating if the result should be returned
-                      as parts ({value:'2.45', unit:'hours'})
-                      Default - false.
+                      as parts ({ value:'2.45', unit:'hours' })
+                      Default: false.
 
             from:     (optional) The date the elapsed time is being calculated "from".
                        If ommited the current Date/Time is used.
@@ -38,7 +40,7 @@ Formats a date into an readable elapsed time, eg:
 
             justNow:  Flag indicating if "just now" should be returned for values
                       less than a minute old.
-                      Default:true
+                      Default: true
 
 ###
 ns.formatElapsed = (date, options = {}) ->
