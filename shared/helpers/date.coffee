@@ -63,40 +63,40 @@ ns.formatElapsed = (date, options = {}) ->
     throw new Error("Date type not supported: #{ date }")
 
 
-  if secondsAgo < 60
-    value = secondsAgo.round(0)
-    unit  = switch format
-              when 'short' then 's'
-              else plural(value, 'second')
+  switch ns.elapsedUnit(secondsAgo)
+    when 'second'
+      value = secondsAgo.round(0)
+      unit  = switch format
+                when 'short' then 's'
+                else plural(value, 'second')
 
-    abbreviation = switch format
-                      when 'short' then 'now'
-                      else 'just now'
+      abbreviation = switch format
+                        when 'short' then 'now'
+                        else 'just now'
 
+    when 'minute'
+      value = (secondsAgo / MINUTE).round(0)
+      unit  = switch format
+                when 'short' then 'm'
+                else plural(value, 'minute')
 
-  else if secondsAgo < HOUR
-    value = (secondsAgo / MINUTE).round(0)
-    unit  = switch format
-              when 'short' then 'm'
-              else plural(value, 'minute')
+    when 'hour'
+      value = (secondsAgo / HOUR).round(0)
+      unit  = switch format
+                when 'short' then 'h'
+                else plural(value, 'hour')
 
-  else if secondsAgo < DAY
-    value = (secondsAgo / HOUR).round(0)
-    unit  = switch format
-              when 'short' then 'h'
-              else plural(value, 'hour')
+    when 'day'
+      value = (secondsAgo / DAY).round(0)
+      unit  = switch format
+                when 'short' then 'd'
+                else plural(value, 'day')
 
-  else if secondsAgo < YEAR
-    value = (secondsAgo / DAY).round(0)
-    unit  = switch format
-              when 'short' then 'd'
-              else plural(value, 'day')
-
-  else
-    value = (secondsAgo / YEAR).round(0)
-    unit  = switch format
-              when 'short' then 'y'
-              else plural(value, 'year')
+    when 'year'
+      value = (secondsAgo / YEAR).round(0)
+      unit  = switch format
+                when 'short' then 'y'
+                else plural(value, 'year')
 
   # Format response.
   valueUnit = switch format
@@ -115,6 +115,25 @@ ns.formatElapsed = (date, options = {}) ->
     return result
   else
     return if secondsAgo < MINUTE then abbreviation else valueUnit
+
+
+
+###
+Determines an appropriate time unit.
+@param seconds: The number of seconds to consider.
+@returns string.
+###
+ns.elapsedUnit = (seconds) ->
+  if seconds < 60
+    'second'
+  else if seconds < HOUR
+    'minute'
+  else if seconds < DAY
+    'hour'
+  else if seconds < YEAR
+    'day'
+  else
+    'year'
 
 
 
