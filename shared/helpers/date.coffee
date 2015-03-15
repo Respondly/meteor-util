@@ -54,7 +54,7 @@ ns.formatElapsed = (date, options = {}) ->
 
   if Object.isDate(date)
     fromDate    = options.from ? new Date()
-    secondsAgo  = Math.round((fromDate - date) / 1000)
+    secondsAgo  = ((fromDate - date) / 1000).round()
 
   else if Object.isNumber(date)
     secondsAgo = date
