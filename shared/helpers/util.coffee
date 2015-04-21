@@ -203,5 +203,12 @@ Util.toId = (value) ->
   result
 
 
+###
+Escape possible malicious code
+###
+Util.escapeHtml = (str) ->
+  var div = document.createElement('div')
+  div.appendChild(document.createTextNode(str))
+  div.innerHTML
 
 
