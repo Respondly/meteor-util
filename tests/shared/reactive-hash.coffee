@@ -1,4 +1,4 @@
-describe.client 'ReactiveHash: constructor', ->
+describe 'ReactiveHash: constructor', ->
 
   it '[onlyOnChange] is false by deault', ->
     expect(new ReactiveHash().onlyOnChange).to.equal false
@@ -10,7 +10,7 @@ describe.client 'ReactiveHash: constructor', ->
 
 
 
-describe 'ReactiveHash: get/set', ->
+describe.client 'ReactiveHash: get/set', ->
   hash = null
   beforeEach -> hash = new ReactiveHash()
 
