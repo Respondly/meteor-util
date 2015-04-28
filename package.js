@@ -116,7 +116,6 @@ Package.onTest(function (api) {
   api.addFiles('tests/shared/path.coffee', ['client', 'server']);
   api.addFiles('tests/shared/position.coffee', ['client', 'server']);
   api.addFiles('tests/shared/reactive-array.coffee', ['client', 'server']);
-  api.addFiles('tests/shared/reactive-hash.coffee', ['client', 'server']);
   api.addFiles('tests/shared/string.coffee', ['client', 'server']);
   api.addFiles('tests/shared/timer.coffee', ['client', 'server']);
   api.addFiles('tests/shared/util.coffee', ['client', 'server']);
@@ -124,6 +123,7 @@ Package.onTest(function (api) {
   api.addFiles('tests/server/server.coffee', 'server');
   api.addFiles('tests/client/controller-base.coffee', 'client');
   api.addFiles('tests/client/local-storage-test.coffee', 'client');
+  api.addFiles('tests/client/reactive-hash.coffee', 'client');
   api.addFiles('tests/client/scoped-session-test.coffee', 'client');
 
 });
