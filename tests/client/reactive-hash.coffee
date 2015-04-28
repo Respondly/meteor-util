@@ -8,9 +8,7 @@ describe 'ReactiveHash: constructor', ->
     expect(hash.onlyOnChange).to.equal true
 
 
-
-
-describe.client 'ReactiveHash: get/set', ->
+describe 'ReactiveHash: get/set', ->
   hash = null
   beforeEach -> hash = new ReactiveHash()
 
