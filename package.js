@@ -99,7 +99,7 @@ Package.onUse(function (api) {
 
 
 Package.onTest(function (api) {
-  api.use(['mike:mocha-package@0.5.6', 'coffeescript']);
+  api.use(['mike:mocha-package@0.5.7', 'coffeescript']);
   api.use('respondly:util@1.0.0');
 
   // Generated with: github.com/philcockfield/meteor-package-paths

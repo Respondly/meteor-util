@@ -1,4 +1,4 @@
-describe 'ReactiveHash: constructor', ->
+describe.client 'ReactiveHash: constructor', ->
 
   it '[onlyOnChange] is false by deault', ->
     expect(new ReactiveHash().onlyOnChange).to.equal false
@@ -48,7 +48,7 @@ describe 'ReactiveHash: get/set', ->
 NOTE: Running only on client because of a fiber issue in the
       test-runner on the server.
 ###
-describe.client 'ReactiveHash: reactivity', ->
+describe 'ReactiveHash: reactivity', ->
   hash = null
   beforeEach -> hash = new ReactiveHash()
 
@@ -388,4 +388,3 @@ describe 'ReactiveHash.dispose', ->
     # never set
     # expect(hash.keys).to.eql {}
     # expect(hash._deps).to.eql {}
-
