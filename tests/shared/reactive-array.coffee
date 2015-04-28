@@ -30,7 +30,7 @@ describe 'ReactiveArray', ->
 # ----------------------------------------------------------------------
 
 
-describe 'ReactiveArray.count', ->
+describe.client 'ReactiveArray.count', ->
   array = null
   count = null
   beforeEach ->
@@ -361,8 +361,3 @@ describe 'observe "changed" callbacks', ->
     expect(oldValue).to.equal 'a'
     expect(newValue).to.equal 'b'
     expect(index).to.equal 0
-
-
-
-
-

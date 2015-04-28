@@ -1,4 +1,4 @@
-describe 'AutoRun', ->
+describe.client 'AutoRun', ->
   class Sample extends AutoRun
   sample = null
 
@@ -41,4 +41,3 @@ describe 'AutoRun', ->
     sample.autorun =>
     sample.autorun =>
     expect(sample.__internal__.depsHandles).to.equal undefined
-
