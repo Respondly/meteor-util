@@ -6,7 +6,8 @@ describe 'Delay (Timer)', ->
   it 'delays for a given amount of time', (done) ->
     Util.delay 50, =>
         elapsed = startedAt.millisecondsAgo()
-        if elapsed < 50
+        #i've seen this as 49..especially on CI
+        if elapsed < 45
           console.error "only", elapsed, "ms elapsed"
         expect(elapsed >= 50).to.equal true
         done()
