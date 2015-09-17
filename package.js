@@ -1,7 +1,7 @@
 Package.describe({
   name: 'respondly:util',
   summary: 'Common utility helpers.',
-  version: '1.0.2',
+  version: '1.0.3',
   git: 'https://github.com/Respondly/meteor-util.git'
 });
 
