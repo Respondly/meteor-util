@@ -15,10 +15,10 @@ Npm.depends({
 Package.onUse(function (api) {
   // api.versionsFrom('1.0');
   api.use([
-    'coffeescript',
-    'jquery',
-    'tracker',
-    'session'
+    'coffeescript@1.0.10',
+    'jquery@1.11.4',
+    'tracker@1.0.9',
+    'session@1.1.1'
   ]);
   api.export('Util');
   api.export('ReactiveHash');
