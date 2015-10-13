@@ -18,6 +18,7 @@ Package.onUse(function (api) {
     'coffeescript',
     'jquery',
     'tracker',
+    'session'
   ]);
   api.export('Util');
   api.export('ReactiveHash');
